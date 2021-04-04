@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		04B279D42619F3EB00DA50B4 /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B279D32619F3EB00DA50B4 /* MainTabBarView.swift */; };
 		04B279EA261A00A000DA50B4 /* MainIdeaStorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B279E9261A00A000DA50B4 /* MainIdeaStorageView.swift */; };
+		04B279F8261A249900DA50B4 /* SearchDiggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B279F7261A249900DA50B4 /* SearchDiggingView.swift */; };
+		04B279FD261A254600DA50B4 /* MyDiggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B279FC261A254600DA50B4 /* MyDiggingView.swift */; };
+		04B27A09261A29AD00DA50B4 /* DiggingFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B27A08261A29AD00DA50B4 /* DiggingFolderView.swift */; };
 		04F7591B2616E41B008C0295 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7591A2616E41B008C0295 /* AppDelegate.swift */; };
 		04F7591D2616E41B008C0295 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7591C2616E41B008C0295 /* SceneDelegate.swift */; };
 		04F759212616E41D008C0295 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04F759202616E41D008C0295 /* Assets.xcassets */; };
@@ -38,6 +41,9 @@
 /* Begin PBXFileReference section */
 		04B279D32619F3EB00DA50B4 /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
 		04B279E9261A00A000DA50B4 /* MainIdeaStorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainIdeaStorageView.swift; sourceTree = "<group>"; };
+		04B279F7261A249900DA50B4 /* SearchDiggingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDiggingView.swift; sourceTree = "<group>"; };
+		04B279FC261A254600DA50B4 /* MyDiggingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDiggingView.swift; sourceTree = "<group>"; };
+		04B27A08261A29AD00DA50B4 /* DiggingFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiggingFolderView.swift; sourceTree = "<group>"; };
 		04F759172616E41B008C0295 /* Digging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Digging.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F7591A2616E41B008C0295 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04F7591C2616E41B008C0295 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +87,8 @@
 		04B279DD2619FCB700DA50B4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				04B27A02261A259F00DA50B4 /* MyDigging */,
+				04B27A01261A258E00DA50B4 /* SearchDigging */,
 				04B279E8261A008200DA50B4 /* MainIdeaStorage */,
 				04B279E7261A005B00DA50B4 /* TabBar */,
 			);
@@ -98,9 +106,34 @@
 		04B279E8261A008200DA50B4 /* MainIdeaStorage */ = {
 			isa = PBXGroup;
 			children = (
+				04B27A07261A299000DA50B4 /* FolderView */,
 				04B279E9261A00A000DA50B4 /* MainIdeaStorageView.swift */,
 			);
 			path = MainIdeaStorage;
+			sourceTree = "<group>";
+		};
+		04B27A01261A258E00DA50B4 /* SearchDigging */ = {
+			isa = PBXGroup;
+			children = (
+				04B279F7261A249900DA50B4 /* SearchDiggingView.swift */,
+			);
+			path = SearchDigging;
+			sourceTree = "<group>";
+		};
+		04B27A02261A259F00DA50B4 /* MyDigging */ = {
+			isa = PBXGroup;
+			children = (
+				04B279FC261A254600DA50B4 /* MyDiggingView.swift */,
+			);
+			path = MyDigging;
+			sourceTree = "<group>";
+		};
+		04B27A07261A299000DA50B4 /* FolderView */ = {
+			isa = PBXGroup;
+			children = (
+				04B27A08261A29AD00DA50B4 /* DiggingFolderView.swift */,
+			);
+			path = FolderView;
 			sourceTree = "<group>";
 		};
 		04F7590E2616E41B008C0295 = {
@@ -295,7 +328,10 @@
 			files = (
 				04B279EA261A00A000DA50B4 /* MainIdeaStorageView.swift in Sources */,
 				04F7591B2616E41B008C0295 /* AppDelegate.swift in Sources */,
+				04B279F8261A249900DA50B4 /* SearchDiggingView.swift in Sources */,
 				04F7591D2616E41B008C0295 /* SceneDelegate.swift in Sources */,
+				04B27A09261A29AD00DA50B4 /* DiggingFolderView.swift in Sources */,
+				04B279FD261A254600DA50B4 /* MyDiggingView.swift in Sources */,
 				04B279D42619F3EB00DA50B4 /* MainTabBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
