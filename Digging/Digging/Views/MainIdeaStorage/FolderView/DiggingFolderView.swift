@@ -8,13 +8,21 @@
 import SwiftUI
 
 struct DiggingFolderView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+  var body: some View {
+    HStack {
+      Image("digging_text_folder_img")
+      VStack {
+        Text("텍스트")
+        Text("디깅 시작하세요")
+      }
+      Spacer()
+      Image(systemName: "chevron.right")
+    }.padding()
+  }
 }
 
 struct DiggingFolderView_Previews: PreviewProvider {
-    static var previews: some View {
-        DiggingFolderView()
-    }
+  static var previews: some View {
+    DiggingFolderView()
+  }
 }

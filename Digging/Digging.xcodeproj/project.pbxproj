@@ -136,6 +136,13 @@
 			path = FolderView;
 			sourceTree = "<group>";
 		};
+		04B27A10261A2B0C00DA50B4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		04F7590E2616E41B008C0295 = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +166,7 @@
 		04F759192616E41B008C0295 /* Digging */ = {
 			isa = PBXGroup;
 			children = (
+				04B27A10261A2B0C00DA50B4 /* Models */,
 				04B279DD2619FCB700DA50B4 /* Views */,
 				04F7591A2616E41B008C0295 /* AppDelegate.swift */,
 				04F7591C2616E41B008C0295 /* SceneDelegate.swift */,

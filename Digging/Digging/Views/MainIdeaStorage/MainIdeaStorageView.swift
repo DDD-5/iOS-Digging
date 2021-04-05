@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+enum DiggingFolderType {
+  case text
+  case image
+  case link
+}
+
 struct MainIdeaStorageView: View {
     var body: some View {
       ScrollView {
