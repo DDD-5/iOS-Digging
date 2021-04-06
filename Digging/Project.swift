@@ -6,22 +6,32 @@
 //
 import ProjectDescription
 
+let projectName = "Digging"
+let organizationName = "Oreo"
+let bundleID = "com.oreo.ddd.Digging"
+
 let project = Project(
-		name: "Digging",
+		name: projectName,
+		organizationName: organizationName,
 		targets: [
 				Target(
-						name: "Digging",
+						name: projectName,
 						platform: .iOS,
 						product: .app,
-						bundleId: "com.oreo.ddd.Digging",
-						infoPlist: .file(path: "Digging/Info.plist"),
+						bundleId: bundleID,
+				        deploymentTarget: DeploymentTarget.iOS(
+						  targetVersion: "13.0",
+						  devices: [DeploymentDevice.iphone]
+					    ),
+						infoPlist: .file(path: "\(projectName)/Info.plist"),
 						sources: [
-								"Digging/Core/**",
-								"Digging/Views/**"
+								"\(projectName)/Core/**",
+								"\(projectName)/Views/**"
 						],
 						resources: [
-							"Digging/SupportFiles/**"
+							"\(projectName)/SupportFiles/**"
 						]
+					
 				)
 		]
 )
