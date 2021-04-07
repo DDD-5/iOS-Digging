@@ -51,8 +51,10 @@ let project = Project(
 					    ),
 						infoPlist: .file(path: "\(projectName)/Info.plist"),
 						sources: [
-								"\(projectName)/Core/**",
-								"\(projectName)/Views/**"
+							"\(projectName)/Core/**",
+							"\(projectName)/Views/**",
+							"\(projectName)/Modifier/**",
+							"\(projectName)/Extension/**"
 						],
 						resources: [
 							"\(projectName)/SupportFiles/Resource/**"

@@ -17,7 +17,7 @@ struct LoginView: View {
 			VStack {
 				Spacer()
 				
-				VStack {
+				VStack(spacing: 0) {
 					
 					HStack {
 						Button(action: {
@@ -74,6 +74,7 @@ struct LoginView: View {
 					alignment: .topLeading
 				)
 				.background(Color.white)
+				.cornerRadius(radius: 8, corners: [.topLeft, .topRight])
 			}
 		}
 	}
