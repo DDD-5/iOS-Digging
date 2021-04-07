@@ -1,5 +1,5 @@
 //
-//  ViewModifier.swift
+//  CornerRadiusStyle.swift
 //  Digging
 //
 //  Created by Gisu Hwang on 2021/04/07.
