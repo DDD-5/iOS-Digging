@@ -8,8 +8,22 @@
 import SwiftUI
 
 struct StoredDiggingListView: View {
+  @State var selection: SelectedType = .total
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+      VStack {
+        UpperTabBarView(selection: $selection)
+        if #available(iOS 14.0, *) {
+          LazyVGrid(columns: [
+            GridItem(.adaptive(minimum: 160))
+          ], content: {
+            DiggingGridCellView().frame(height: 160)
+            DiggingGridCellView().frame(height: 160)
+            DiggingGridCellView().frame(height: 160)
+          })
+        } else {
+          // Fallback on earlier versions
+        }
+      }
     }
 }
 
