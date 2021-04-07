@@ -49,12 +49,9 @@ let project = Project(
 						  targetVersion: "13.0",
 						  devices: [DeploymentDevice.iphone]
 					    ),
-						infoPlist: .file(path: "\(projectName)/Info.plist"),
+						infoPlist: .file(path: "\(projectName)/SupportFiles/Info.plist"),
 						sources: [
-							"\(projectName)/Core/**",
-							"\(projectName)/Views/**",
-							"\(projectName)/Modifier/**",
-							"\(projectName)/Extension/**"
+							"\(projectName)/Source/**"
 						],
 						resources: [
 							"\(projectName)/SupportFiles/Resource/**"
