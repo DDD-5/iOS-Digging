@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct DiggingFolderView: View {
+  var title: String
+  var description: String
+  
   var body: some View {
     HStack {
       Image("digging_text_folder_img")
       VStack {
         Text("텍스트")
+          .font(
+            .custom("AppleSDGothicNeo-Bold", size: 16)
+          )
+          .frame(alignment: .leading)
         Text("디깅 시작하세요")
       }
       Spacer()
@@ -23,6 +30,6 @@ struct DiggingFolderView: View {
 
 struct DiggingFolderView_Previews: PreviewProvider {
   static var previews: some View {
-    DiggingFolderView()
+    DiggingFolderView(title: "text", description: "")
   }
 }
