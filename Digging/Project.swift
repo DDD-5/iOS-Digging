@@ -11,14 +11,34 @@ let organizationName = "Oreo"
 let bundleID = "com.oreo.ddd.Digging"
 
 
+// TODO: 엑스코드 프리뷰 이슈로 현재 선언만 한 상태입니다. 확인후 Project 생성자에 주입예정
+let settings = Settings(configurations: [
+	.debug(name: "Debug", xcconfig: "\(projectName)/SupportFiles/Config/Debug.xcconfig"),
+	.release(name: "Release", xcconfig: "\(projectName)/SupportFiles/Config/Release.xcconfig")
+])
+
+// TODO: 엑스코드 프리뷰 이슈로 현재 선언만 한 상태입니다. 확인후 Project 생성자에 주입예정
+
+let schems = [
+			Scheme.init(name: projectName,
+						shared: true,
+						buildAction: BuildAction.init(targets: ["Digging"]),
+						testAction: TestAction.init(targets: ["Digging"]),
+						runAction: RunAction.init(configurationName: "Release",
+												  arguments: nil)
+			),
+			Scheme.init(name: "DiggingTest",
+						shared: true,
+						buildAction: BuildAction.init(targets: ["Digging"]),
+						testAction: TestAction.init(targets: ["Digging"]),
+						runAction: RunAction.init(configurationName: "Debug",
+												  arguments: nil)
+			)
+	]
 
 let project = Project(
 		name: projectName,
 		organizationName: organizationName,
-		settings: Settings(configurations: [
-			.debug(name: "Debug", xcconfig: "\(projectName)/SupportFiles/Config/Debug.xcconfig"),
-			.release(name: "Release", xcconfig: "\(projectName)/SupportFiles/Config/Release.xcconfig"),
-		]),
 		targets: [
 				Target(
 						name: projectName,
@@ -35,27 +55,10 @@ let project = Project(
 								"\(projectName)/Views/**"
 						],
 						resources: [
-							"\(projectName)/SupportFiles/Resource**"
+							"\(projectName)/SupportFiles/Resource/**"
 						]
 					
 				)
-		],
-		schemes: [
-			Scheme.init(name: projectName,
-						shared: true,
-						buildAction: BuildAction.init(targets: ["Digging"]),
-						testAction: TestAction.init(targets: ["Digging"]),
-						runAction: RunAction.init(configurationName: "Release",
-												  arguments: nil)
-			),
-			Scheme.init(name: "DiggingTest",
-						shared: true,
-						buildAction: BuildAction.init(targets: ["Digging"]),
-						testAction: TestAction.init(targets: ["Digging"]),
-						runAction: RunAction.init(configurationName: "Debug",
-												  arguments: nil)
-			)
 		]
 
 )
-
