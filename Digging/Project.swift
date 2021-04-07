@@ -10,9 +10,15 @@ let projectName = "Digging"
 let organizationName = "Oreo"
 let bundleID = "com.oreo.ddd.Digging"
 
+
+
 let project = Project(
 		name: projectName,
 		organizationName: organizationName,
+		settings: Settings(configurations: [
+			.debug(name: "Debug", xcconfig: "\(projectName)/SupportFiles/Config/Debug.xcconfig"),
+			.release(name: "Release", xcconfig: "\(projectName)/SupportFiles/Config/Release.xcconfig"),
+		]),
 		targets: [
 				Target(
 						name: projectName,
@@ -29,9 +35,27 @@ let project = Project(
 								"\(projectName)/Views/**"
 						],
 						resources: [
-							"\(projectName)/SupportFiles/**"
+							"\(projectName)/SupportFiles/Resource**"
 						]
 					
 				)
+		],
+		schemes: [
+			Scheme.init(name: projectName,
+						shared: true,
+						buildAction: BuildAction.init(targets: ["Digging"]),
+						testAction: TestAction.init(targets: ["Digging"]),
+						runAction: RunAction.init(configurationName: "Release",
+												  arguments: nil)
+			),
+			Scheme.init(name: "DiggingTest",
+						shared: true,
+						buildAction: BuildAction.init(targets: ["Digging"]),
+						testAction: TestAction.init(targets: ["Digging"]),
+						runAction: RunAction.init(configurationName: "Debug",
+												  arguments: nil)
+			)
 		]
+
 )
+
