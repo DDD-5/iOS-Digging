@@ -46,7 +46,7 @@ struct UpperTabBarView: View {
           .padding()
         Spacer()
       }
-    }
+    }.padding(.top, 20)
   }
 }
 
