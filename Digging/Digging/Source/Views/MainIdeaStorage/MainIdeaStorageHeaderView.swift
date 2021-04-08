@@ -14,6 +14,7 @@ struct MainIdeaStorageHeaderView: View {
   var body: some View {
     Text(title)
       .frame(width: UIScreen.main.bounds.width, height: 48, alignment: .topLeading)
+      .padding(.leading, 20)
       .background(Color.white)
   }
 }
