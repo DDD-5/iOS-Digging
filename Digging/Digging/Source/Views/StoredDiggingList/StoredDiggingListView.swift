@@ -8,27 +8,33 @@
 import SwiftUI
 
 struct StoredDiggingListView: View {
+  
+  // MARK: - Properties
+  
   @State var selection: SelectedType = .total
-    var body: some View {
-      VStack {
-        UpperTabBarView(selection: $selection)
-        if #available(iOS 14.0, *) {
-          LazyVGrid(columns: [
-            GridItem(.adaptive(minimum: 160))
-          ], content: {
-            DiggingGridCellView().frame(height: 160)
-            DiggingGridCellView().frame(height: 160)
-            DiggingGridCellView().frame(height: 160)
-          })
-        } else {
-          // Fallback on earlier versions
-        }
-      }
+  
+  // MARK: - Layout
+  
+  var body: some View {
+    VStack(alignment: .leading) {
+      UpperTabBarView(selection: $selection)
+      LazyVGrid(columns: [
+        GridItem(.adaptive(minimum: 120, maximum: 160), spacing: 20)
+      ], content: {
+        DiggingGridCellView().frame(height: 160)
+        DiggingGridCellView().frame(height: 160)
+      })
+      Spacer()
     }
+    .navigationBarTitle(
+      Text("Title"),
+      displayMode: .inline
+    )
+  }
 }
 
 struct StoredDiggingListView_Previews: PreviewProvider {
-    static var previews: some View {
-        StoredDiggingListView()
-    }
+  static var previews: some View {
+    StoredDiggingListView()
+  }
 }
