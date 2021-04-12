@@ -60,10 +60,6 @@ struct DiggingGridCellView: View {
       ZStack {
         Color(red: 246/255, green: 246/255, blue: 246/255)
           .cornerRadius(10)
-        Image.init(systemName: "suit.heart.fill")
-          .foregroundColor(.red)
-          .frame(width: geometry.size.width, height: geometry.size.height, alignment: .topTrailing)
-          .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 8))
       }
     }
   }
