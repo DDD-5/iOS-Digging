@@ -9,67 +9,69 @@ import SwiftUI
 
 struct MainIdeaStorageView: View {
   
+  // MARK: - Properties
+  
   @ObservedObject
   var viewModel = MainIdeaStorageViewModel()
   
+  var gridLayout = [
+    GridItem(.adaptive(minimum: 160, maximum: 160), spacing: 15)
+  ]
+  
+  // MARK: - Layout
+  
   var body: some View {
-    List {
-      HStack {
-        Text("Digging과 함께\n영감을 수집해요💥")
-          .font(
-            .custom("AppleSDGothicNeo-Bold", size: 24)
+    ScrollView {
+      LazyVStack {
+        HStack {
+          Text("Digging과 함께\n영감을 수집해요💥")
+            .font(
+              .custom("AppleSDGothicNeo-Bold", size: 24)
+            )
+          Spacer()
+          Image("digging_main_top")
+        }
+        .ignoresSafeArea()
+        .padding(
+          EdgeInsets(
+            top: 20,
+            leading: 20,
+            bottom: 32,
+            trailing: 20
           )
-        Spacer()
-        Image("digging_main_top")
-      }
-      .padding(
-        EdgeInsets(
-          top: 20,
-          leading: 20,
-          bottom: 32,
-          trailing: 20
         )
-      )
-      Section(
-        header: MainIdeaStorageHeaderView(title: "💡 내가 디깅한 영감")
-      )
-      {
+        MainIdeaStorageHeaderView(title: "💡 내가 디깅한 영감")
+          .padding(.bottom, 5)
         ForEach(viewModel.folderInfoArray) { folderInfo in
           ZStack {
-            DiggingFolderView(title: "", description: "")
             NavigationLink(
               destination: StoredDiggingListView())
             {
-              EmptyView()
+              DiggingFolderView(title: "", description: "")
+                .padding(EdgeInsets(top: 0, leading: 20, bottom: 8, trailing: 20))
             }
-            .buttonStyle(PlainButtonStyle())
-            .frame(width: 0)
-            .opacity(0.0)
           }
         }
-      }
-      
-      Section(
-        header: MainIdeaStorageHeaderView(
+        
+        MainIdeaStorageHeaderView(
           title: "💡 최근에 디깅한 영감"
         )
-        .padding(.top, 28)
-      )
-      {
-        LazyVGrid(columns: [
-          GridItem(.adaptive(minimum: 120, maximum: 160), spacing: 20)
-        ], content: {
+        .padding(.top, 20)
+        
+        LazyVGrid(
+          columns: gridLayout,
+          alignment: .leading,
+          spacing: 15,
+          content: {
+          DiggingGridCellView().frame(height: 160)
+          DiggingGridCellView().frame(height: 160)
           DiggingGridCellView().frame(height: 160)
           DiggingGridCellView().frame(height: 160)
         })
+        .padding([.leading, .trailing], 20)
       }
-      .background(Color.white)
+      Spacer(minLength: 30)
     }
-    .onAppear(perform: {
-      // TODO: Remove - bug fix를 위한 temp code
-      UITableView.appearance().showsVerticalScrollIndicator = false
-      UITableView.appearance().tableFooterView = UIView()
-    })
     .navigationBarHidden(true)
   }
 }
