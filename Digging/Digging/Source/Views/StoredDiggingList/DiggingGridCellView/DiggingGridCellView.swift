@@ -7,51 +7,20 @@
 
 import SwiftUI
 
-
-// MARK: List row extensions
-
-extension View {
-    
-    func hideListRowSeparator() -> some View {
-        return customListRowSeparator(insets: .init(), insetsColor: .clear)
-    }
-    
-    func customListRowSeparator(
-        insets: EdgeInsets,
-        insetsColor: Color) -> some View {
-        modifier(HideRowSeparatorModifier(insets: insets,
-                                          background: insetsColor
-        )) .onAppear {
-            UITableView.appearance().separatorStyle = .none
-            UITableView.appearance().separatorColor = .clear
-        }
-    }
-}
-
-// MARK: ViewModifier
-
-private struct HideRowSeparatorModifier: ViewModifier {
-        
-    var insets: EdgeInsets
-    var background: Color
-    
-    func body(content: Content) -> some View {
-        content
-            .padding(insets)
-            .frame(
-                minWidth: 0,
-                maxWidth: .infinity,
-                maxHeight: .infinity,
-                alignment: .leading
-            )
-            .listRowInsets(EdgeInsets())
-            .background(background)
-    }
-}
-
-struct DiggingGridCellView: View {
-  var likeButtonView: Image {
-    return Image.init(systemName: "")
+struct DiggingGridCellView<T: View>: View {
+  
+  // MARK: - UI Components
+  
+  var content: T
+  
+  var likeButtonView: Button<Image> {
+    return Button(action: {}, label: {
+      Image.init("")
+    })
+  }
+  
+  init(@ViewBuilder content: () -> T) {
+    self.content = content()
   }
   
   var body: some View {
@@ -60,6 +29,9 @@ struct DiggingGridCellView: View {
       ZStack {
         Color(red: 246/255, green: 246/255, blue: 246/255)
           .cornerRadius(10)
+        content
+        likeButtonView
+          .offset(x: 128, y: 8)
       }
     }
   }
@@ -67,6 +39,8 @@ struct DiggingGridCellView: View {
 
 struct DiggingGridCellView_Previews: PreviewProvider {
   static var previews: some View {
-    DiggingGridCellView()
+    DiggingGridCellView {
+      Text("")
+    }
   }
 }
