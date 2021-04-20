@@ -6,7 +6,10 @@ target 'Digging' do
   use_frameworks!
 
   # Pods for Digging
-
+	
+	# UI
+	pod 'BottomSheet', :git => 'https://github.com/weitieda/bottom-sheet.git'
+	
   # Etc
   pod 'R.swift'
 
