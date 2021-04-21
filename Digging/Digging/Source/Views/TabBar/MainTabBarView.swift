@@ -46,7 +46,7 @@ struct MainTabBarView: View {
 			.accentColor(.black)
 			.bottomSheet(
 					isPresented: $viewModel.isCustomItemSelected,
-					height: 290,
+					height: 300,
 					topBarHeight: 16,
 					topBarCornerRadius: 16,
 					showTopIndicator: false

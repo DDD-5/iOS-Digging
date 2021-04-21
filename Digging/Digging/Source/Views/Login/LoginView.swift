@@ -12,7 +12,6 @@ import Rswift
 struct LoginView: View {
 	var body: some View {
 		
-		
 		VStack(spacing: 0) {
 				
 				HStack {
@@ -21,8 +20,7 @@ struct LoginView: View {
 						
 					})
 					{
-						// TODO: 이미지 교체 예정
-						Image("tabbar_search_digging")
+						Image(R.image.close.name)
 							.resizable()
 							.frame(width: 24, height: 24)
 							.padding(
@@ -42,33 +40,50 @@ struct LoginView: View {
 						.font(Font.custom("AppleSDGothicNeo-Regular", size: 14))
 					
 					Button(action:{print("구글 로그인")}){
+						HStack(alignment: .center) {
+							Spacer()
+							Image(R.image.close.name)
+								.resizable()
+								.frame(width: 24, height: 24)
+							Text("구글 로그인")
+								.font(Font.custom("AppleSDGothicNeo-Bold", size: 16))
+								.foregroundColor(Color(red: 96 / 255, green: 96 / 255, blue: 96 / 255)
+								)
+							
+							Spacer()
+						}
+						.padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
+
 						
-						Text("구글 로그인")
-							.font(Font.custom("AppleSDGothicNeo-Bold", size: 16))
-							.foregroundColor(Color(red: 96 / 255, green: 96 / 255, blue: 96 / 255)
-							)
-							.padding()
-							.background(RoundedRectangle(cornerRadius: 8).stroke(Color.black, lineWidth: /*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/))
 					}
+					.background(RoundedRectangle(cornerRadius: 8).stroke(Color.black, lineWidth: /*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/))
+					.padding(EdgeInsets(top: 0, leading: 38, bottom: 0, trailing: 38))
 					
 					Button(action:{print("애플 로그인")}){
-						
-						Text("애플 로그인")
-							.font(Font.custom("AppleSDGothicNeo-Bold", size: 16))
-							.foregroundColor(Color.white)
-							.padding()
-							.background(Color.black)
-							.cornerRadius(8)
+						HStack {
+							Spacer()
+							
+							Image(R.image.close.name)
+								.resizable()
+								.frame(width: 24, height: 24)
+							Text("애플 로그인")
+								.font(Font.custom("AppleSDGothicNeo-Bold", size: 16))
+								.foregroundColor(Color.white)
+							
+							Spacer()
+						}
+						.padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
+					
 					}
+					.background(Color.black)
+					.cornerRadius(8)
+					.padding(EdgeInsets(top: 0, leading: 38, bottom: 0, trailing: 38))
+					
+					
 				})
 				.padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
 			
 			}
-			.frame(
-				maxWidth: .infinity,
-				maxHeight: 290,
-				alignment: .topLeading
-			)
 			.background(Color.white)
 		
 		}
