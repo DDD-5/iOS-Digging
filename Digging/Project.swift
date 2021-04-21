@@ -11,6 +11,7 @@ let organizationName = "Oreo"
 let bundleID = "com.oreo.ddd.Digging"
 
 
+let bottomSheetDependancy = Package.package(url: "https://github.com/weitieda/bottom-sheet", from: "1.0.0")
 let targetAction = [
 	TargetAction.pre(path: "Scripts/RSwiftRunScript.sh",
 					 arguments: [],
@@ -49,6 +50,9 @@ let schems = [
 let project = Project(
 		name: projectName,
 		organizationName: organizationName,
+		packages: [
+			bottomSheetDependancy
+		],
 		targets: [
 				Target(
 						name: projectName,
@@ -68,6 +72,7 @@ let project = Project(
 						],
 						actions: targetAction,
 						dependencies: [
+							.package(product: "BottomSheet"),
 							.cocoapods(path: ".")
 						]
 					
