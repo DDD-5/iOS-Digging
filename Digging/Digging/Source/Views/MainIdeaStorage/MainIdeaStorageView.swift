@@ -63,10 +63,9 @@ struct MainIdeaStorageView: View {
           alignment: .leading,
           spacing: 15,
           content: {
-          DiggingGridCellView().frame(height: 160)
-          DiggingGridCellView().frame(height: 160)
-          DiggingGridCellView().frame(height: 160)
-          DiggingGridCellView().frame(height: 160)
+            DiggingGridCellView {
+              
+            }.frame(height: 160)
         })
         .padding([.leading, .trailing], 20)
       }
