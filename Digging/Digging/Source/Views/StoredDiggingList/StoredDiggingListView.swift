@@ -16,17 +16,27 @@ struct StoredDiggingListView: View {
   
   @State var selection: SelectedType = .total
   
+  @State var showingSheet = false
+  
   // MARK: - Layout
   
   var body: some View {
     VStack(alignment: .leading) {
       DiggingListNavigationBar()
       UpperTabBarView(selection: $selection)
+      Button("Show Sheet") {
+        showingSheet.toggle()
+      }
+      .sheet(isPresented: $showingSheet) {
+        CreateDiggingView()
+      }
       LazyVGrid(columns: [
         GridItem(.adaptive(minimum: 120, maximum: 160), spacing: 20)
       ], content: {
-        DiggingGridCellView().frame(height: 160)
-        DiggingGridCellView().frame(height: 160)
+        DiggingGridCellView {
+          
+        }.frame(height: 160)
+        
       })
       Spacer()
     }
