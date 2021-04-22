@@ -8,6 +8,36 @@
 
 import SwiftUI
 
+// TODO: Temp code for test
+extension String {
+  var isBlank: Bool {
+    return allSatisfy({ $0.isWhitespace })
+  }
+}
+
+// TODO: Temp code for test
+struct TextArea: View {
+  private let placeholder: String
+  @Binding var text: String
+  
+  init(_ placeholder: String, text: Binding<String>) {
+    self.placeholder = placeholder
+    self._text = text
+  }
+  
+  var body: some View {
+    ZStack(alignment: .topLeading) {
+      TextEditor(text: $text)
+        .foregroundColor(Color.primary.opacity(0.25))
+        .padding(EdgeInsets(top: 0, leading: 4, bottom: 7, trailing: 0)).textContentType(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+      if text.isEmpty {
+        Text(placeholder)
+          .foregroundColor(Color(UIColor.placeholderText)).padding(.horizontal, 16)
+          .padding(.vertical, 12.1)
+      }
+    }
+  }
+}
 struct CreateDiggingView: View {
   @State var title: String = ""
   
