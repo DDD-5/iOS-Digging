@@ -38,6 +38,21 @@ struct TextArea: View {
     }
   }
 }
+
+struct CustomTextField: View {
+  var placeholder: Text
+  @Binding var text: String
+  var editingChanged: (Bool)->() = { _ in }
+  var commit: ()->() = { }
+  
+  var body: some View {
+    ZStack(alignment: .leading) {
+      TextEditor(text: $text)
+      if text.isEmpty { placeholder }
+    }
+  }
+}
+
 struct CreateDiggingView: View {
   @State var title: String = ""
   
