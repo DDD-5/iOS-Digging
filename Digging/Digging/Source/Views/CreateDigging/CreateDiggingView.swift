@@ -55,6 +55,14 @@ struct CustomTextField: View {
 
 struct CreateDiggingView: View {
   @State var title: String = ""
+  @State var description: String = ""
+  @State var text: String = ""
+  
+  // TODO: temp code for test
+  init() {
+      UITextView.appearance().textContainerInset =
+           UIEdgeInsets(top: 20, left: 50, bottom: 0, right: 12)   // << !!
+  }
   
   var body: some View {
     ScrollView {
@@ -74,28 +82,53 @@ struct CreateDiggingView: View {
         }
         .padding([.leading], 20)
         
-        HStack {
-          Text("제목")
-          Spacer()
-          Text("0/10")
+        VStack {
+          HStack {
+            Text("제목")
+              .font(.custom("AppleSDGothicNeo-Medium", size: 14)
+              )
+            Spacer()
+            Text("0/10")
+              .font(.custom("AppleSDGothicNeo-Regular", size: 13)
+              )
+          }
+          
+          TextField(LocalizedStringKey("  10자 이내로 제목을 입력해주세요."), text: $title)
+            .frame(height: 44)
+            .overlay(
+              RoundedRectangle(cornerRadius: 8)
+                .stroke(Color.grayBorder, lineWidth: 1)
+            )
         }
-        TextField(LocalizedStringKey("10자 이내로 제목을 입력해주세요."), text: $title)
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-          .border(Color(red: 229 / 255, green: 229 / 255, blue: 229 / 255), width: 1)
+        .padding([.leading, .trailing], 20)
+        
         
         HStack {
           Text("내용")
+            .font(.custom("AppleSDGothicNeo-Medium", size: 14)
+            )
           Spacer()
           Text("0/200")
+            .font(.custom("AppleSDGothicNeo-Regular", size: 13)
+            )
         }
-        
-        TextEditor(text: .constant("Placeholder"))
-        Text("태그")
+        .padding([.leading, .trailing], 20)
+        TextArea("10자 이내로 제목을 입력해주세요.", text: $text)
+          .frame(height: 143.9)
+          .overlay(
+            RoundedRectangle(cornerRadius: 8)
+              .stroke(Color(red: 229 / 255, green: 229 / 255, blue: 229 / 255), lineWidth: 1)
+          )
+          .padding([.leading, .trailing], 20)
+        HStack {
+          Text("태그")
+          Spacer()
+        }
         HStack {
           TextField(LocalizedStringKey("test"), text: $title)
           Button(action: {}, label: {
-            /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
-          })
+            Text("입력")
+          }).background(Color.blue)
         }
       }
     }
