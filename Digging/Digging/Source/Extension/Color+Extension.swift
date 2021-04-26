@@ -10,4 +10,6 @@ import SwiftUI
 
 extension Color {
   static let grayBorder = Color("grayBorder")
+  static let darkGray = Color("darkGray")
+  static let diggingYellow = Color("diggingYellow")
 }
