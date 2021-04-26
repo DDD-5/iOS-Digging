@@ -65,73 +65,120 @@ struct CreateDiggingView: View {
   }
   
   var body: some View {
-    ScrollView {
-      VStack {
-        HStack {
-          Spacer()
-          Button(action: {}, label: {
-            Image("close_icon_img").frame(width: 24, height: 24, alignment: .topTrailing)
-          })
-        }
-        .padding([.top, .trailing], 20)
-        
-        HStack {
-          Image("digging_text_folder_small_img")
-          Text("텍스트")
-          Spacer()
-        }
-        .padding([.leading], 20)
-        
+    ZStack {
+      ScrollView {
         VStack {
           HStack {
-            Text("제목")
+            Spacer()
+            Button(action: {}, label: {
+              Image("close_icon_img").frame(width: 24, height: 24, alignment: .topTrailing)
+            })
+          }
+          .padding([.top, .trailing], 20)
+          
+          HStack {
+            Image("digging_text_folder_small_img")
+            Text("텍스트")
+            Spacer()
+          }
+          .padding([.leading], 20)
+          
+          VStack {
+            HStack {
+              Text("제목")
+                .font(.custom("AppleSDGothicNeo-Medium", size: 14)
+                )
+              Spacer()
+              Text("0/10")
+                .font(.custom("AppleSDGothicNeo-Regular", size: 13)
+                )
+            }
+            
+            TextField(LocalizedStringKey("  10자 이내로 제목을 입력해주세요."), text: $title)
+              .frame(height: 44)
+              .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                  .stroke(Color.grayBorder, lineWidth: 1)
+              )
+          }
+          .padding([.leading, .trailing], 20)
+          
+          
+          HStack {
+            Text("내용")
               .font(.custom("AppleSDGothicNeo-Medium", size: 14)
               )
             Spacer()
-            Text("0/10")
+            Text("0/200")
               .font(.custom("AppleSDGothicNeo-Regular", size: 13)
               )
           }
-          
-          TextField(LocalizedStringKey("  10자 이내로 제목을 입력해주세요."), text: $title)
-            .frame(height: 44)
+          .padding([.leading, .trailing], 20)
+          TextArea("10자 이내로 제목을 입력해주세요.", text: $text)
+            .frame(height: 143.9)
             .overlay(
               RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.grayBorder, lineWidth: 1)
+                .stroke(Color(red: 229 / 255, green: 229 / 255, blue: 229 / 255), lineWidth: 1)
             )
-        }
-        .padding([.leading, .trailing], 20)
-        
-        
-        HStack {
-          Text("내용")
-            .font(.custom("AppleSDGothicNeo-Medium", size: 14)
+            .padding([.leading, .trailing], 20)
+          HStack {
+            Text("태그")
+            Spacer()
+          }
+          HStack {
+            TextField(LocalizedStringKey("추천 태그를 선택하거나, 직접 입력해주세요."), text: $title)
+              .frame(width: 274, height: 44)
+              .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                  .stroke(
+                    Color.grayBorder,
+                    lineWidth: 1
+                  )
+              )
+              .padding(.trailing, 8)
+            
+            Button(action: {}, label: {
+              Text("입력")
+                .modifier(
+                  DiggingFont(
+                    type: .regular,
+                    size: 14
+                  )
+                )
+                .foregroundColor(.darkGray)
+            })
+            .frame(
+              width: 53,
+              height: 44
             )
-          Spacer()
-          Text("0/200")
-            .font(.custom("AppleSDGothicNeo-Regular", size: 13)
-            )
-        }
-        .padding([.leading, .trailing], 20)
-        TextArea("10자 이내로 제목을 입력해주세요.", text: $text)
-          .frame(height: 143.9)
-          .overlay(
-            RoundedRectangle(cornerRadius: 8)
-              .stroke(Color(red: 229 / 255, green: 229 / 255, blue: 229 / 255), lineWidth: 1)
+            .background(Color.diggingYellow)
+            .cornerRadius(8)
+          }
+          .padding(
+            [.leading, .trailing],
+            20
           )
-          .padding([.leading, .trailing], 20)
-        HStack {
-          Text("태그")
-          Spacer()
-        }
-        HStack {
-          TextField(LocalizedStringKey("test"), text: $title)
-          Button(action: {}, label: {
-            Text("입력")
-          }).background(Color.blue)
         }
       }
     }
+    Button(action: {}, label: {
+      Text("작성 완료😀")
+        .modifier(
+          DiggingFont(
+            type: .bold,
+            size: 16
+          )
+        )
+        .foregroundColor(.darkGray)
+    })
+    .frame(minWidth: 0, idealWidth: 335, maxWidth: .infinity, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealHeight: 60, maxHeight: 60)
+    .background(Color.diggingYellow)
+    .cornerRadius(8)
+    .padding(
+      [.leading, .trailing],
+      20
+    )
+    .padding(.bottom, 50)
   }
 }
 
