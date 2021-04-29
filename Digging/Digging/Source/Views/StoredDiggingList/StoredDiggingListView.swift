@@ -13,7 +13,6 @@ struct StoredDiggingListView: View {
   
   @GestureState private var dragOffset = CGSize.zero
 
-  
   @State var selection: SelectedType = .total
   
   @State var showingSheet = false
