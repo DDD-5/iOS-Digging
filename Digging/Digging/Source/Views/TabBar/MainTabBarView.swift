@@ -13,45 +13,47 @@ struct MainTabBarView: View {
 	@ObservedObject private var viewModel = MainTabBarViewModel(initialIndex: 1, customItemIndex: 2)
 	
 	var body: some View {
-		ZStack {
-			TabView(selection: $viewModel.itemSelected) {
-				MainIdeaStorageView()
-					.tabItem {
-						Image("tabbar_main_idea_storage")
-						Text("보관함")
-					}
-					.tag(1)
-				
-				MyDiggingView()
-					.tabItem {
-						Image("tabbar_create_digging")
-						Text("디깅")
-					}
-					.tag(2)
-				
-				SearchDiggingView()
-					.tabItem {
-						Image("tabbar_search_digging")
-						Text("검색")
-					}
-					.tag(3)
-				
-				MyDiggingView()
-					.tabItem {
-						Image("tabbar_my_digging")
-						Text("마이 디깅")
-					}
-					.tag(4)
-			}
-			.accentColor(.black)
-			.bottomSheet(
+		NavigationView {
+			ZStack {
+				TabView(selection: $viewModel.itemSelected) {
+					MainIdeaStorageView()
+						.tabItem {
+							Image("tabbar_main_idea_storage")
+							Text("보관함")
+						}
+						.tag(1)
+					
+					MyDiggingView()
+						.tabItem {
+							Image("tabbar_create_digging")
+							Text("디깅")
+						}
+						.tag(2)
+					
+					SearchDiggingView()
+						.tabItem {
+							Image("tabbar_search_digging")
+							Text("검색")
+						}
+						.tag(3)
+					
+					MyDiggingInfoView()
+						.tabItem {
+							Image("tabbar_my_digging")
+							Text("마이 디깅")
+						}
+						.tag(4)
+				}
+				.accentColor(.black)
+				.bottomSheet(
 					isPresented: $viewModel.isCustomItemSelected,
 					height: 300,
 					topBarHeight: 16,
 					topBarCornerRadius: 16,
 					showTopIndicator: false
-			) {
-				LoginView()
+				) {
+					LoginView()
+				}
 			}
 		}
 	}
