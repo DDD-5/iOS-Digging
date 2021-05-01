@@ -32,10 +32,12 @@ struct DateLabelView: View {
 }
 
 struct DateLabelView_Previews: PreviewProvider {
+  @State static var tempState: DateLabelState = .today
+  
   static var previews: some View {
     DateLabelView(
-      dateNumber: 1,
-      state: .today
+      state: $tempState,
+      dateNumber: 1
     )
   }
 }
