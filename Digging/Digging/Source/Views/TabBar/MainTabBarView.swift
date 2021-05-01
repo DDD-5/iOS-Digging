@@ -49,7 +49,7 @@ struct MainTabBarView: View {
             Image("tabbar_search_digging")
             Text("검색")
           }.tag(3)
-        MyDiggingView()
+        MyDiggingInfoView()
           .tabItem {
             Image("tabbar_my_digging")
             Text("마이 디깅")
