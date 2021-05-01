@@ -7,14 +7,40 @@
 
 import SwiftUI
 
-struct DiggingGridCellView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct DiggingGridCellView<T: View>: View {
+  
+  // MARK: - UI Components
+  
+  var content: T
+  
+  var likeButtonView: Button<Image> {
+    return Button(action: {}, label: {
+      Image.init("")
+    })
+  }
+  
+  init(@ViewBuilder content: () -> T) {
+    self.content = content()
+  }
+  
+  var body: some View {
+    
+    GeometryReader { geometry in
+      ZStack {
+        Color(red: 246/255, green: 246/255, blue: 246/255)
+          .cornerRadius(10)
+        content
+        likeButtonView
+          .offset(x: 128, y: 8)
+      }
     }
+  }
 }
 
 struct DiggingGridCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        DiggingGridCellView()
+  static var previews: some View {
+    DiggingGridCellView {
+      Text("")
     }
+  }
 }

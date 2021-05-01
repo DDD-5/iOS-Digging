@@ -9,12 +9,20 @@ import SwiftUI
 
 struct MainIdeaStorageView: View {
   
+  // MARK: - Properties
+  
   @ObservedObject
   var viewModel = MainIdeaStorageViewModel()
   
+  var gridLayout = [
+    GridItem(.adaptive(minimum: 160, maximum: 160), spacing: 15)
+  ]
+  
+  // MARK: - Layout
+  
   var body: some View {
-    NavigationView {
-      List {
+    ScrollView {
+      LazyVStack {
         HStack {
           Text("Digging과 함께\n영감을 수집해요💥")
             .font(
@@ -23,6 +31,7 @@ struct MainIdeaStorageView: View {
           Spacer()
           Image("digging_main_top")
         }
+        .ignoresSafeArea()
         .padding(
           EdgeInsets(
             top: 20,
@@ -31,27 +40,38 @@ struct MainIdeaStorageView: View {
             trailing: 20
           )
         )
-        Section(
-          header: Text("💡 내가 디깅한 영감")
-        )
-        {
-          ForEach(viewModel.folderInfoArray) { folderInfo in
+        MainIdeaStorageHeaderView(title: "💡 내가 디깅한 영감")
+          .padding(.bottom, 5)
+        ForEach(viewModel.folderInfoArray) { folderInfo in
+          ZStack {
             NavigationLink(
               destination: StoredDiggingListView())
-              {
+            {
               DiggingFolderView(title: "", description: "")
+                .padding(EdgeInsets(top: 0, leading: 20, bottom: 8, trailing: 20))
             }
           }
         }
-        Section(
-          header: Text("💡 최근에 디깅한 영감"))
-        {
-          Text("Test")
-        }
+        
+        MainIdeaStorageHeaderView(
+          title: "💡 최근에 디깅한 영감"
+        )
+        .padding(.top, 20)
+        
+        LazyVGrid(
+          columns: gridLayout,
+          alignment: .leading,
+          spacing: 15,
+          content: {
+            DiggingGridCellView {
+              
+            }.frame(height: 160)
+        })
+        .padding([.leading, .trailing], 20)
       }
-      .navigationBarHidden(true)
-      .listRowInsets(.none)
+      Spacer(minLength: 30)
     }
+    .navigationBarHidden(true)
   }
 }
 

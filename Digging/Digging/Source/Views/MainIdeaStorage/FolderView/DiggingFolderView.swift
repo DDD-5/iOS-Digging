@@ -15,16 +15,30 @@ struct DiggingFolderView: View {
     HStack {
       Image("digging_text_folder_img")
       VStack {
-        Text("텍스트")
-          .font(
-            .custom("AppleSDGothicNeo-Bold", size: 16)
-          )
-          .frame(alignment: .leading)
-        Text("디깅 시작하세요")
+        HStack {
+          Text("텍스트")
+            .font(
+              .custom("AppleSDGothicNeo-Bold", size: 16)
+            )
+            .frame(alignment: .leading)
+          Spacer()
+        }
+        HStack {
+          Text("디깅을 시작해볼까요?")
+            .font(
+              .custom("AppleSDGothicNeo-Regular", size: 14)
+            )
+            .foregroundColor(Color(red: 85/255, green: 85/255, blue: 85/255))
+            .frame(alignment: .leading)
+          Spacer()
+        }
       }
       Spacer()
       Image(systemName: "chevron.right")
-    }.padding()
+    }
+    .padding()
+    .background(Color(red: 246/255, green: 246/255, blue: 246/255))
+    .cornerRadius(10)
   }
 }
 

@@ -8,13 +8,54 @@
 import SwiftUI
 
 struct StoredDiggingListView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  
+  // MARK: - Properties
+  
+  @GestureState private var dragOffset = CGSize.zero
+
+  @State var selection: SelectedType = .total
+  
+  @State var showingSheet = false
+  
+  // MARK: - Layout
+  
+  var body: some View {
+    VStack(alignment: .leading) {
+      DiggingListNavigationBar()
+      UpperTabBarView(selection: $selection)
+      Button("Show Sheet") {
+        showingSheet.toggle()
+      }
+      .sheet(isPresented: $showingSheet) {
+        CreateDiggingView()
+      }
+      LazyVGrid(columns: [
+        GridItem(.adaptive(minimum: 120, maximum: 160), spacing: 20)
+      ], content: {
+        DiggingGridCellView {
+          
+        }.frame(height: 160)
+        
+      })
+      Spacer()
     }
+    .navigationBarHidden(true)
+  }
 }
 
 struct StoredDiggingListView_Previews: PreviewProvider {
-    static var previews: some View {
-        StoredDiggingListView()
+  static var previews: some View {
+    StoredDiggingListView()
+  }
+}
+
+
+extension View {
+  public func currentDeviceNavigationViewStyle() -> AnyView {
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      return AnyView(self.navigationViewStyle(DefaultNavigationViewStyle()))
+    } else {
+      return AnyView(self.navigationViewStyle(StackNavigationViewStyle()))
     }
+  }
 }

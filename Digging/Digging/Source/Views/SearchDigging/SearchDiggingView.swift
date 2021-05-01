@@ -8,15 +8,21 @@
 import SwiftUI
 
 struct SearchDiggingView: View {
-    var body: some View {
-      VStack {
-        Text("검색 디깅")
-      }
+  var body: some View {
+    VStack {
+      Text("검색")
+        .modifier(
+          DiggingFont(
+            type: .bold,
+            size: 28
+          )
+        )
     }
+  }
 }
 
 struct SearchDiggingView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchDiggingView()
-    }
+  static var previews: some View {
+    SearchDiggingView()
+  }
 }
