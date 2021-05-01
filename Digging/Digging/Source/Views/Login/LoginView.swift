@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Rswift
+import RxSwift
 
 struct LoginView: View {
 	var body: some View {
