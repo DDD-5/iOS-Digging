@@ -13,7 +13,11 @@ struct LoginView: View {
 	var body: some View {
 		
 		VStack(spacing: 0) {
-				
+			
+			ZStack{
+				Text("로그인 또는 회원 가입")
+					.frame(maxWidth: .infinity, alignment: .center)
+					.font(Font.custom("AppleSDGothicNeo-Bold", size: 16))
 				HStack {
 					Button(action: {
 						print("Button Close")
@@ -27,9 +31,11 @@ struct LoginView: View {
 								EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
 							)
 					}
-					Text("로그인 또는 회원 가입")
-						.frame(maxWidth: .infinity, alignment: .leading)
-						.font(Font.custom("AppleSDGothicNeo-Bold", size: 16))
+					Spacer()
+				
+			}
+				
+					
 					
 				}
 				Divider()
