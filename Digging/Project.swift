@@ -60,7 +60,7 @@ let project = Project(
 						product: .app,
 						bundleId: bundleID,
 				        deploymentTarget: DeploymentTarget.iOS(
-						  targetVersion: "13.0",
+						  targetVersion: "14.0",
 						  devices: [DeploymentDevice.iphone]
 					    ),
 						infoPlist: .file(path: "\(projectName)/SupportFiles/Info.plist"),
