@@ -10,6 +10,15 @@ import SwiftUI
 
 extension Color {
   static let grayBorder = Color("grayBorder")
+  
   static let darkGray = Color("darkGray")
+  
   static let diggingYellow = Color("diggingYellow")
+  
+  static let calendarGray = Color("calendarGray")
+  
+  static let lightGray = Color("lightGray")
+  
+  static let cardDarkGray = Color("cardDarkGray")
+  
 }
