@@ -21,7 +21,7 @@ struct CalendarDayNameView: View {
       .modifier(
         DiggingFont(
           type: .bold,
-          size: 28
+          size: 16
         )
       )
   }

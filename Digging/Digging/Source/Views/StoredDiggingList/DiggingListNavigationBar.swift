@@ -7,17 +7,19 @@
 //
 
 import SwiftUI
+import Combine
 
 struct DiggingListNavigationBar: View {
   
   // MARK: - Properties
   
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-  @State private var selectedCategory = "텍스트"
+  @State private var selectedCategory = 1
   
   // MARK: - Layout
   
   var body: some View {
+  
     HStack {
       Button(action: {
         self.presentationMode.wrappedValue.dismiss()
@@ -28,16 +30,17 @@ struct DiggingListNavigationBar: View {
         selection: $selectedCategory,
         label: HStack {
           Image("digging_text_folder_small_img")
-          Text(selectedCategory)
+          Text("텍스트")
           Image("dropdown_icon_img")
         },
-      content: {
-        Text("텍스트").tag(1)
-        Text("이미지").tag(2)
-        Text("링크").tag(3)
-      })
-      .pickerStyle(MenuPickerStyle())
+        content: {
+          Text("텍스트").tag(1)
+          Text("이미지").tag(2)
+          Text("링크").tag(3)
+        })
+        .pickerStyle(MenuPickerStyle())
     }
+    .padding(EdgeInsets(top: 40, leading: 20, bottom: 40, trailing: 0))
   }
 }
 
