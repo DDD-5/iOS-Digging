@@ -30,6 +30,9 @@ DerivedData/
 *.dSYM.zip
 *.dSYM
 .DS_Store
+*.generated.swift
+Development.xcconfig
+Release.xcconfig
 
 ## Playgrounds
 timeline.xctimeline

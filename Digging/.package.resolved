@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "BottomSheet",
+        "repositoryURL": "https://github.com/weitieda/bottom-sheet",
+        "state": {
+          "branch": null,
+          "revision": "98e2ae0b47875faef28e181cf968b9645f7678af",
+          "version": "1.0.6"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
