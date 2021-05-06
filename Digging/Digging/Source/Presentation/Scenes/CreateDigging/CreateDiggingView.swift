@@ -29,7 +29,8 @@ struct TextArea: View {
     ZStack(alignment: .topLeading) {
       TextEditor(text: $text)
         .foregroundColor(Color.primary.opacity(0.25))
-        .padding(EdgeInsets(top: 0, leading: 4, bottom: 7, trailing: 0)).textContentType(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+        .padding(EdgeInsets(top: 0, leading: 4, bottom: 7, trailing: 0))
+        .textContentType(.none)
       if text.isEmpty {
         Text(placeholder)
           .foregroundColor(Color(UIColor.placeholderText)).padding(.horizontal, 16)
@@ -55,8 +56,11 @@ struct CustomTextField: View {
 
 struct CreateDiggingView: View {
   @State var title: String = ""
+  @State var tagText: String = ""
   @State var description: String = ""
   @State var text: String = ""
+  @State var recommendedTagList = ["일반 개발", "웹 개발", "Javascript", "React", "Vue.js", "Angular", "Node.js"]
+  @State var addedTagList: [String] = []
   
   // TODO: temp code for test
   init() {
@@ -123,10 +127,12 @@ struct CreateDiggingView: View {
             .padding([.leading, .trailing], 20)
           HStack {
             Text("태그")
+              .modifier(DiggingFont(type: .medium, size: 14))
             Spacer()
           }
+          .padding([.leading, .trailing], 20)
           HStack {
-            TextField(LocalizedStringKey("추천 태그를 선택하거나, 직접 입력해주세요."), text: $title)
+            TextField(LocalizedStringKey("추천 태그를 선택하거나, 직접 입력해주세요."), text: $tagText)
               .frame(width: 274, height: 44)
               .overlay(
                 RoundedRectangle(cornerRadius: 8)
@@ -137,7 +143,11 @@ struct CreateDiggingView: View {
               )
               .padding(.trailing, 8)
             
-            Button(action: {}, label: {
+            Button(action: {
+              if !addedTagList.contains(tagText) {
+                addedTagList.append(tagText)
+              }
+            }, label: {
               Text("입력")
                 .modifier(
                   DiggingFont(
@@ -159,6 +169,39 @@ struct CreateDiggingView: View {
             20
           )
         }
+        FlowLayout(mode: .scrollable,
+                                   binding: .constant(5),
+                                   items: $recommendedTagList) {
+          Text($0)
+            .modifier(DiggingFont(type: .medium, size: 14))
+            .padding([.leading, .trailing], 14)
+            .padding([.top, .bottom], 10)
+            .overlay(
+              RoundedRectangle(cornerRadius: 18)
+                .stroke(
+                  Color.tagBorder,
+                  lineWidth: 1
+                )
+            )
+                                   
+        }
+        .padding()
+        
+        Divider()
+          .foregroundColor(.grayBorder)
+          .padding([.leading, .trailing], 20)
+        
+        FlowLayout(mode: .scrollable,
+                                   binding: .constant(5),
+                                   items: $addedTagList) {
+          Text($0)
+            .foregroundColor(.white)
+            .modifier(DiggingFont(type: .medium, size: 14))
+            .padding([.leading, .trailing], 14)
+            .padding([.top, .bottom], 10)
+            .background(Color.tagFillColor.cornerRadius(18))
+        }
+        .padding()
       }
     }
     Button(action: {}, label: {
