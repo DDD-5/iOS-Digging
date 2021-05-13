@@ -33,7 +33,13 @@ struct MyDiggingInfoView: View {
                 size: 28
               )
             )
-          Image("")
+			Spacer()
+			NavigationLink(
+				destination: SettingView()) {
+					Image(R.image.setting.name)
+				}
+
+
         }
         .padding([.leading, .trailing], 20)
         HStack {
