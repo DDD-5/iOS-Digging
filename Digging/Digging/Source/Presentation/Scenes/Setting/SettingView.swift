@@ -9,8 +9,34 @@
 import SwiftUI
 
 struct SettingView: View {
+	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+
+		List {
+			SettingCategoryView(title: "내 프로필", image: R.image.right_calendar_arrow_img.name)
+			SettingCategoryView(title: "앱 문의/건의", image: R.image.right_calendar_arrow_img.name)
+			SettingCategoryView(title: "로그아웃", image: R.image.right_calendar_arrow_img.name)
+
+			Text("현재 버전 1.0")
+				.foregroundColor(.lightGray)
+				.modifier(
+					DiggingFont(type: .regular, size: 14)
+				)
+				.frame(alignment: .leading)
+				.padding()
+
+		}
+		.navigationBarBackButtonHidden(true)
+				.navigationBarTitle("설정", displayMode: .inline)
+				.navigationBarItems(leading:
+										Button(action: {
+											self.presentationMode.wrappedValue.dismiss()
+										}, label: {
+											Image("back_btn_img")
+										})
+				)
+		
     }
 }
 
@@ -19,3 +45,40 @@ struct SettingView_Previews: PreviewProvider {
         SettingView()
     }
 }
+
+
+struct SettingCategoryView: View {
+
+	var title: String
+	var image: String
+
+	private var isEmptyImage: Bool {
+		return image.isEmpty
+	}
+
+	var body: some View {
+		HStack {
+
+			Text(title)
+				.modifier(
+					DiggingFont(type: .regular, size: 14)
+				)
+				.frame(alignment: .leading)
+			Spacer()
+			if !isEmptyImage {
+
+				Image(image)
+					.frame(width: 24, height: 24)
+
+
+			}
+
+		}.padding()
+	}
+}
+struct SettingCategoryView_Previews: PreviewProvider {
+	static var previews: some View {
+		SettingCategoryView(title: "text", image: R.image.right_calendar_arrow_img.name)
+	}
+}
+
