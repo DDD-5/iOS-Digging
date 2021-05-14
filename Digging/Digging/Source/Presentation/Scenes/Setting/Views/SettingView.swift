@@ -15,7 +15,12 @@ struct SettingView: View {
 
 		List {
 			SettingCategoryView(title: "내 프로필", image: R.image.right_calendar_arrow_img.name)
-			SettingCategoryView(title: "앱 문의/건의", image: R.image.right_calendar_arrow_img.name)
+			NavigationLink(
+				destination: SettingAppSuggestionView())
+			{
+				SettingCategoryView(title: "앱 문의/건의", image: "")
+			}
+
 			SettingCategoryView(title: "로그아웃", image: R.image.right_calendar_arrow_img.name)
 
 			Text("현재 버전 1.0")
@@ -64,10 +69,10 @@ struct SettingCategoryView: View {
 					DiggingFont(type: .regular, size: 14)
 				)
 				.frame(alignment: .leading)
-			Spacer()
-			if !isEmptyImage {
 
-				Image(image)
+			if !isEmptyImage {
+				Spacer()
+				Image(systemName: "chevron.right")
 					.frame(width: 24, height: 24)
 
 
