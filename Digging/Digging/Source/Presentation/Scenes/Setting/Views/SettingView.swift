@@ -14,14 +14,22 @@ struct SettingView: View {
     var body: some View {
 
 		List {
+			
 			SettingCategoryView(title: "내 프로필", image: R.image.right_calendar_arrow_img.name)
-			NavigationLink(
-				destination: SettingAppSuggestionView())
-			{
-				SettingCategoryView(title: "앱 문의/건의", image: "")
+			
+			
+			ZStack {
+				NavigationLink(
+					destination: SettingAppSuggestionView())
+				{
+					SettingCategoryView(title: "앱 문의/건의", image: "")
+					
+				}
+	
 			}
+			
 
-			SettingCategoryView(title: "로그아웃", image: R.image.right_calendar_arrow_img.name)
+			SettingCategoryView(title: "로그아웃", image: "")
 
 			Text("현재 버전 1.0")
 				.foregroundColor(.lightGray)
