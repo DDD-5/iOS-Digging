@@ -12,17 +12,20 @@ import Lottie
 
 struct LottieView: UIViewRepresentable {
   
+  // MARK: - Properties
+  
   var filename: String
   
+  // MARK: - Internal methods
   
   func makeUIView(context: Context) -> UIView {
+    let view = UIView()
     let lottieView = AnimationView(name: filename)
     lottieView.loopMode = .loop
     lottieView.play()
     lottieView.contentMode = .scaleAspectFit
+    lottieView.backgroundBehavior = .pauseAndRestore
     lottieView.translatesAutoresizingMaskIntoConstraints = false
-    let view = UIView()
-    
     view.addSubview(lottieView)
     
     NSLayoutConstraint.activate([
