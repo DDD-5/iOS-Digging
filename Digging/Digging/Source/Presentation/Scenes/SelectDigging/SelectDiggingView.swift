@@ -42,6 +42,7 @@ struct SelectDiggingView: View {
 				}, label: {
 					SelectDiggingCategoryView(title: "텍스트", image: R.image.digging_text_folder_img.name)
 				})
+				.accentColor(.black)
 				.sheet(isPresented: $showingSheet) {
 					CreateDiggingView()
 				}
@@ -50,6 +51,7 @@ struct SelectDiggingView: View {
 				}, label: {
 					SelectDiggingCategoryView(title: "사진", image: R.image.digging_text_folder_img.name)
 				})
+				.accentColor(.black)
 				.sheet(isPresented: $showingSheet) {
 					CreateDiggingView()
 				}
@@ -58,6 +60,7 @@ struct SelectDiggingView: View {
 				}, label: {
 					SelectDiggingCategoryView(title: "링크", image: R.image.digging_text_folder_img.name)
 				})
+				.accentColor(.black)
 				.sheet(isPresented: $showingSheet) {
 					CreateDiggingView()
 				}
