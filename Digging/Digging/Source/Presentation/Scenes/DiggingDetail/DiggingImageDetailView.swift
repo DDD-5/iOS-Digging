@@ -1,30 +1,44 @@
 //
-//  DiggingTextDetailView.swift
+//  DiggingImageDetailView.swift
 //  Digging
 //
-//  Created by GisuHwang on 2021/05/20.
+//  Created by GisuHwang on 2021/05/23.
 //  Copyright © 2021 Oreo. All rights reserved.
 //
 
 import SwiftUI
 
-struct DiggingTextDetailView: View {
+struct DiggingImageDetailView: View {
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+	var gridLayout = [
+		GridItem(.adaptive(minimum: 105, maximum: 105), spacing: 10)
+	]
 	
-    var body: some View {
+		var body: some View {
 			ScrollView {
 				VStack {
 					
 					DiggingDetailTitleView(title: "영감을 디깅하는 방법", date: "2021.04.21")
 					
-					DiggingDetailContentTextView(contentText: """
-			요즘 디깅 한다는 말을 많이 사용한다. 나도 인스타그램에 디깅을 많이 보긴 하는데 실제로 사용해본 적은 없는것 같다. 요즘 디깅 한다는 말을 많이 사용한다. 나도 인스타그램에서 디깅을 많이 보긴 하는데 실제로 사용해본 적은 없는것 같다.요즘 디깅 한다는 말을 많이 사용한다. 나도 인스타그램에서 디깅을 많이 보긴 하는데 실제로 사용해본 적은 없는것 같다. 요즘 디
-			""")
+			
+					LazyVGrid(
+						columns: gridLayout,
+						alignment: .leading,
+						spacing: 15,
+						content: {
+							NavigationLink(
+								destination: DiggingTextDetailView(),
+								label: {
+									DiggingGridCellView {
+										
+									}.frame(height: 105)
+								})
+					})
+					.padding([.leading, .trailing], 20)
 					
 					Divider()
 						.padding([.leading, .trailing], 20)
 					Spacer()
-					
 					// TODO: merge 후 flowLayout 적용예정
 				}
 				.navigationBarItems(
@@ -76,8 +90,8 @@ struct DiggingTextDetailView: View {
 		}
 }
 
-struct DiggingTextDetailView_Previews: PreviewProvider {
+struct DiggingImageDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DiggingTextDetailView()
+        DiggingImageDetailView()
     }
 }

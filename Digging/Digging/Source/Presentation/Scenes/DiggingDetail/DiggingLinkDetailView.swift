@@ -1,26 +1,23 @@
 //
-//  DiggingTextDetailView.swift
+//  DiggingLinkDetailView.swift
 //  Digging
 //
-//  Created by GisuHwang on 2021/05/20.
+//  Created by GisuHwang on 2021/05/23.
 //  Copyright © 2021 Oreo. All rights reserved.
 //
 
 import SwiftUI
 
-struct DiggingTextDetailView: View {
+struct DiggingLinkDetailView: View {
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 	
-    var body: some View {
+		var body: some View {
 			ScrollView {
 				VStack {
 					
 					DiggingDetailTitleView(title: "영감을 디깅하는 방법", date: "2021.04.21")
 					
-					DiggingDetailContentTextView(contentText: """
-			요즘 디깅 한다는 말을 많이 사용한다. 나도 인스타그램에 디깅을 많이 보긴 하는데 실제로 사용해본 적은 없는것 같다. 요즘 디깅 한다는 말을 많이 사용한다. 나도 인스타그램에서 디깅을 많이 보긴 하는데 실제로 사용해본 적은 없는것 같다.요즘 디깅 한다는 말을 많이 사용한다. 나도 인스타그램에서 디깅을 많이 보긴 하는데 실제로 사용해본 적은 없는것 같다. 요즘 디
-			""")
-					
+					DiggingDetalLinkView(linkURL: "https://www.google.com")
 					Divider()
 						.padding([.leading, .trailing], 20)
 					Spacer()
@@ -76,8 +73,8 @@ struct DiggingTextDetailView: View {
 		}
 }
 
-struct DiggingTextDetailView_Previews: PreviewProvider {
+struct DiggingLinkDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DiggingTextDetailView()
+        DiggingLinkDetailView()
     }
 }
