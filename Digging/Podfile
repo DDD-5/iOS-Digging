@@ -6,8 +6,8 @@ target 'Digging' do
   use_frameworks!
 
   # Pods for Digging
-	
-	
+	pod 'Moya/Combine', :git => 'https://github.com/Moya/Moya.git', :tag => '15.0.0-alpha.1'
+
   # Etc
   pod 'R.swift'
 
