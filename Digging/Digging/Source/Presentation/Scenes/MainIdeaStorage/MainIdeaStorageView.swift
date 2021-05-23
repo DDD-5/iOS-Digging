@@ -70,6 +70,13 @@ struct MainIdeaStorageView: View {
 									
 								}.frame(height: 160)
 							})
+						NavigationLink(
+							destination: DiggingLinkDetailView(),
+							label: {
+								DiggingGridCellView {
+									
+								}.frame(height: 160)
+							})
         })
         .padding([.leading, .trailing], 20)
       }
