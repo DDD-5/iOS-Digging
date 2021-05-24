@@ -13,7 +13,7 @@ struct StoredDiggingListView: View {
   
   @GestureState private var dragOffset = CGSize.zero
 
-  @State var selection: SelectedType = .total
+  @State var selection: Int = 0
   
   @State var showingSheet = false
   
@@ -22,7 +22,7 @@ struct StoredDiggingListView: View {
   var body: some View {
     VStack(alignment: .leading) {
       DiggingListNavigationBar()
-      UpperTabBarView(selection: $selection)
+      UpperTabBarView(selection: $selection, tabs: ["전체", "좋아요"])
       Button("Show Sheet") {
         showingSheet.toggle()
       }
