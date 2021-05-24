@@ -18,7 +18,7 @@ struct DiggingRectangleCardView: View {
           DiggingFont(type: .bold, size: 14)
         )
       }
-      .padding([.top, .leading], 20)
+      .padding([.top, .leading], 10)
       .padding([.bottom], 12)
       VStack(
         alignment: .leading,
@@ -35,7 +35,7 @@ struct DiggingRectangleCardView: View {
           )
       }
       .padding( [.leading, .trailing], 20)
-      .padding(.bottom, 16)
+      .padding(.bottom, 10)
     }
     .overlay(RoundedRectangle(cornerRadius: 8)
               .stroke(
