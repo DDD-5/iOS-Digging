@@ -40,10 +40,9 @@ final class Networking: MoyaProvider<MultiTarget>, NetworkingProtocol {
 			}
 		}, session: session, plugins: logger)
 	}
-	
-	// TODO: Request 함수 구현 에정
-//	func request(_ target: TargetType, file: StaticString, function: StaticString, line: UInt) -> AnyPublisher<Response, MoyaError> {
-//		return self.requestPublisher(.target(target))
-//			.filterSuccessfulStatusCodes()
-//	}
+
+	func request(_ target: TargetType, file: StaticString, function: StaticString, line: UInt) -> AnyPublisher<Response, MoyaError> {
+		return self.requestPublisher(.target(target))
+			.filterSuccessfulStatusCodes()
+	}
 }
