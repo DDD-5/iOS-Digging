@@ -16,8 +16,8 @@ enum BaseServiceError: Error {
 
 extension BaseService {
 	var baseURL: URL {
-		// TODO: configuration 으로 대체예정 임시 리터럴처리
-		guard let url = URL(string: "http://3.36.82.56:8080") else { fatalError("Bad URL Request") }
+		// TODO: configuration 으로 대체예정 임시 테스트 url 리터럴처리
+		guard let url = URL(string: "https://jsonplaceholder.typicode.com") else { fatalError("Bad URL Request") }
 		return url
 	}
 

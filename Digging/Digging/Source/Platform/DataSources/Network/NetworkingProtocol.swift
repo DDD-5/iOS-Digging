@@ -9,13 +9,16 @@
 import Moya
 import Combine
 
+enum DiggingNetworkError: Error {
+	case message(String)
+}
+
 protocol NetworkingProtocol {
-	func request(_ target: TargetType, file: StaticString, function: StaticString, line: UInt) -> AnyPublisher<Response, MoyaError>
-	
+	func request(_ target: TargetType, file: StaticString, function: StaticString, line: UInt) -> AnyPublisher<Response, DiggingNetworkError>
 }
 
 extension NetworkingProtocol {
-	func request(_ target: TargetType, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> AnyPublisher<Response, MoyaError> {
+	func request(_ target: TargetType, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> AnyPublisher<Response, DiggingNetworkError> {
 		return self.request(target, file: file, function: function, line: line)
 	}
 }
@@ -24,7 +27,7 @@ final class Networking: MoyaProvider<MultiTarget>, NetworkingProtocol {
 
 	
 	init(logger: [PluginType]) {
-		
+
 		let session = MoyaProvider<MultiTarget>.defaultAlamofireSession()
 		session.sessionConfiguration.timeoutIntervalForRequest = 10
 		super.init(requestClosure: { endpoint, completion in
@@ -41,8 +44,15 @@ final class Networking: MoyaProvider<MultiTarget>, NetworkingProtocol {
 		}, session: session, plugins: logger)
 	}
 
-	func request(_ target: TargetType, file: StaticString, function: StaticString, line: UInt) -> AnyPublisher<Response, MoyaError> {
+	func request(_ target: TargetType, file: StaticString, function: StaticString, line: UInt) -> AnyPublisher<Response, DiggingNetworkError> {
 		return self.requestPublisher(.target(target))
 			.filterSuccessfulStatusCodes()
+			.print("requestPublisher")
+			.mapError { error -> DiggingNetworkError in
+				return DiggingNetworkError.message(error.localizedDescription)
+			}
+			.eraseToAnyPublisher()
+
+
 	}
 }

@@ -14,32 +14,38 @@ enum DiggingServcie {
 	case diggingList(userID: String)
 	case diggingDetail(diggingID: String)
 	case totalTags(userID: String)
+	case test
 }
 
 extension DiggingServcie: BaseService {
 	var path: String {
 		switch self {
-		case .createDigging:
-			return ""
-		case .diggingList(let userID):
-			return ""
-		case .diggingDetail(let diggingID):
-			return ""
-		case .totalTags(let userID):
-			return "/api/user/get_total_tags"
+			case .createDigging:
+				return ""
+			case .diggingList(let userID):
+				return ""
+			case .diggingDetail(let diggingID):
+				return ""
+			case .totalTags(let userID):
+				return "/api/user/get_total_tags"
+			case .test:
+				return"/posts"
 		}
 	}
 	
 	var method: Moya.Method {
 		switch self {
-		case .createDigging:
-			return .post
-		case .diggingList:
-			return .get
-		case .diggingDetail:
-			return .get
-		case .totalTags:
-			return .get
+			case .createDigging:
+				return .post
+			case .diggingList:
+				return .get
+			case .diggingDetail:
+				return .get
+			case .totalTags:
+				return .get
+			case.test:
+				return .get
+
 		}
 	}
 	
@@ -48,10 +54,12 @@ extension DiggingServcie: BaseService {
 		var body: [String: Any] = [:]
 		
 		switch self {
-		case .createDigging:
-			return .requestCompositeParameters(bodyParameters: body, bodyEncoding: parameterEncoding, urlParameters: parameters)
-		case .diggingList, .diggingDetail, .totalTags:
-			return .requestParameters(parameters: parameters, encoding: parameterEncoding)
+			case .createDigging:
+				return .requestCompositeParameters(bodyParameters: body, bodyEncoding: parameterEncoding, urlParameters: parameters)
+			case .diggingList, .diggingDetail, .totalTags:
+				return .requestParameters(parameters: parameters, encoding: parameterEncoding)
+			case .test:
+				return .requestParameters(parameters: parameters, encoding: parameterEncoding)
 		}
 	}
 	
@@ -64,23 +72,28 @@ extension DiggingServcie: BaseService {
 		let parameters: [String: Any] = defaultParameters
 		
 		switch self {
-		case .createDigging:
-			return parameters
-		case .diggingList(let userID):
-			return parameters
-		case .diggingDetail(let diggingID):
-			return parameters
-		case .totalTags(let userID):
-			return parameters
+			case .createDigging:
+				return parameters
+			case .diggingList(let userID):
+				return parameters
+			case .diggingDetail(let diggingID):
+				return parameters
+			case .totalTags(let userID):
+				return parameters
+			case .test:
+				return parameters
+
 		}
 	}
 	
 	var parameterEncoding: ParameterEncoding {
 		switch self {
-		case .createDigging:
-			return JSONEncoding.default
-		case .diggingList, .diggingDetail, .totalTags:
-			return URLEncoding.queryString
+			case .createDigging:
+				return JSONEncoding.default
+			case .diggingList, .diggingDetail, .totalTags:
+				return URLEncoding.queryString
+			case .test:
+				return URLEncoding.queryString
 		}
 	}
 }
