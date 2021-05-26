@@ -47,12 +47,14 @@ struct MainTabBarView: View {
 				.accentColor(.black)
 				.bottomSheet(
 					isPresented: $viewModel.isCustomItemSelected,
-					height: 300,
+					height: 350,
 					topBarHeight: 16,
 					topBarCornerRadius: 16,
 					showTopIndicator: false
 				) {
-					LoginView()
+					// TODO: 비로그인시 로그인 바텀시트뷰 present
+//					LoginView()
+					SelectDiggingView()
 				}
 			}
 		}

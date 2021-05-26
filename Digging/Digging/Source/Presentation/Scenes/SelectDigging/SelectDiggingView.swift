@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct SelectDiggingView: View {
+	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+	@State var showingSheet = false
 	var body: some View {
 
 		VStack(spacing: 0) {
@@ -16,6 +18,7 @@ struct SelectDiggingView: View {
 			HStack {
 				Button(action: {
 					print("Button Close")
+					self.presentationMode.wrappedValue.dismiss()
 
 				})
 				{
@@ -32,12 +35,35 @@ struct SelectDiggingView: View {
 
 			}
 			Divider()
-			// TODO: 뷰모델로 처리예정
-			List{
-				SelectDiggingCategoryView(title: "텍스트", image: R.image.digging_text_folder_img.name)
-				SelectDiggingCategoryView(title: "사진", image: R.image.digging_text_folder_img.name)
-				SelectDiggingCategoryView(title: "링크", image: R.image.digging_text_folder_img.name)
-
+			
+			VStack {
+				Button(action: {
+					showingSheet.toggle()
+				}, label: {
+					SelectDiggingCategoryView(title: "텍스트", image: R.image.digging_text_folder_img.name)
+				})
+				.accentColor(.black)
+				.sheet(isPresented: $showingSheet) {
+					CreateDiggingView()
+				}
+				Button(action: {
+					showingSheet.toggle()
+				}, label: {
+					SelectDiggingCategoryView(title: "사진", image: R.image.digging_text_folder_img.name)
+				})
+				.accentColor(.black)
+				.sheet(isPresented: $showingSheet) {
+					CreateDiggingView()
+				}
+				Button(action: {
+					showingSheet.toggle()
+				}, label: {
+					SelectDiggingCategoryView(title: "링크", image: R.image.digging_text_folder_img.name)
+				})
+				.accentColor(.black)
+				.sheet(isPresented: $showingSheet) {
+					CreateDiggingView()
+				}
 			}
 		}
 		.background(Color.white)
