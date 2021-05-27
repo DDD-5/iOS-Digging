@@ -89,6 +89,7 @@ struct DiggingTextDetailView: View {
 						}
 						
 					})
+			.onAppear { self.viewModel.fetchDiggingTextInfo()}
 			.navigationBarTitleDisplayMode(.inline)
 			.navigationBarColor(backgroundColor: .white, tintColor: .clear)
 			.navigationBarBackButtonHidden(true)
