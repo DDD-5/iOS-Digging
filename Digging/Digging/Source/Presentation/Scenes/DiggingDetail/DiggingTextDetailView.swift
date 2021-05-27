@@ -12,8 +12,14 @@ import Combine
 struct DiggingTextDetailView: View {
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 	@State var recommendedTagList = ["일반 개발", "웹 개발", "Javascript", "React", "Vue.js", "Angular", "Node.js"]
+	@ObservedObject var viewModel: DiggingTextDetailViewModel
+	
+	init(viewModel: DiggingTextDetailViewModel) {
+		self.viewModel = viewModel
+	}
 	
 	var body: some View {
+		
 		ScrollView {
 			VStack {
 				
@@ -91,11 +97,7 @@ struct DiggingTextDetailView: View {
 }
 
 struct DiggingTextDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        DiggingTextDetailView()
-    }
-}
-
-struct Test: Codable {
-	var a: String
+	static var previews: some View {
+		DiggingTextDetailView(viewModel: DiggingTextDetailViewModel(postID: 0))
+	}
 }

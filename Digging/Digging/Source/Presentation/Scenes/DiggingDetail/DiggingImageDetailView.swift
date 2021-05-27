@@ -30,7 +30,7 @@ struct DiggingImageDetailView: View {
 					spacing: 15,
 					content: {
 						NavigationLink(
-							destination: DiggingTextDetailView(),
+							destination: Text("Image"),
 							label: {
 								DiggingGridCellView {
 									

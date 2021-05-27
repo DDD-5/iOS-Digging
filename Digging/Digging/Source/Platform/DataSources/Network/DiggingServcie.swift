@@ -15,7 +15,7 @@ enum DiggingServcie {
 	case diggingDetail(diggingID: String)
 	case totalTags(userID: String)
 	case test
-	case diggingDetailText(userID: String)
+	case diggingDetailText(postID: Int)
 }
 
 extension DiggingServcie: BaseService {
@@ -86,9 +86,10 @@ extension DiggingServcie: BaseService {
 				return parameters
 			case .test:
 				return parameters
-		case .diggingDetailText(let userID):
-			// userid=13&postid=11
-			parameters.concat(dict: ["userid": userID])
+		case .diggingDetailText(let postID):
+			// TODO: Userdefault 활용 예정, 의견 필요 하며, 추후 헤더에 토큰 주입시 불필요하여, 고정 값 처리
+			let userID = 13 //
+			parameters.concat(dict: ["userid": userID, "postid": postID])
 			return parameters
 		}
 	}

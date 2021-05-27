@@ -20,11 +20,11 @@ struct DiggingTextInfo: Codable {
 	private enum CodingKeys: String, CodingKey {
 		case postID = "post_id"
 		case textID = "text_id"
-		case titile
-		case content
+		case titile = "title"
+		case content = "content"
 		case isLike = "is_like"
 		case createdAt = "created_at"
 		case updatedAt = "updated_at"
-		case tags
+		case tags = "tags"
 	}
 }

@@ -1,0 +1,44 @@
+//
+//  DiggingTextDetailViewModel.swift
+//  Digging
+//
+//  Created by GisuHwang on 2021/05/27.
+//  Copyright © 2021 Oreo. All rights reserved.
+//
+
+import Foundation
+import Moya
+import Combine
+
+class DiggingTextDetailViewModel: ObservableObject {
+	
+	private var cancellables = Set<AnyCancellable>()
+	private let provider: MoyaProvider<DiggingServcie> = MoyaProvider<DiggingServcie>()
+	private let postID: Int
+	init(postID: Int) {
+		self.postID = postID
+	}
+}
+
+extension DiggingTextDetailViewModel {
+	func fetchDiggingTextInfo() {
+//		let provider: MoyaProvider<DiggingServcie> = MoyaProvider<DiggingServcie>()
+		self.provider.requestPublisher(.diggingDetailText(postID: postID))
+			.print("-- diggingDetailText --")
+			.receive(on: DispatchQueue.main)
+			.map(\.data)
+			.decode(type: DiggingTextInfo.self, decoder: JSONDecoder())
+			.sink(
+					receiveCompletion: { [weak self] completion in
+
+						guard case let .failure(error) = completion else { return }
+
+									 print(error)
+					},
+					receiveValue: { [weak self] textInfo in
+						print(textInfo)
+					}
+			)
+			.store(in: &cancellables)
+	}
+}
