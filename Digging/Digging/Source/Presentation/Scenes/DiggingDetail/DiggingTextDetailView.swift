@@ -48,16 +48,15 @@ struct DiggingTextDetailView: View {
 						Button(action: {
 							print("좋아요")
 						}) {
-							// TODO: 제플린 요청후 변경예정
-							Image(R.image.digging_text_folder_img.name)
+
+							Image(R.image.digging_like_deselect.name)
 								.resizable()
 								.frame(width: 24, height: 24, alignment: .center)
 						}
 						Button(action: {
 							print("작성")
 						}) {
-							// TODO: 제플린 요청후 변경예정
-							Image(R.image.digging_text_folder_img.name)
+							Image(R.image.digging_write.name)
 								.resizable()
 								.frame(width: 24, height: 24, alignment: .center)
 						}
@@ -65,13 +64,13 @@ struct DiggingTextDetailView: View {
 						Button(action: {
 							print("삭제")
 						}) {
-							// TODO: 제플린 요청후 변경예정
-							Image(R.image.digging_text_folder_img.name)
+							Image(R.image.digging_delete.name)
 								.resizable()
 								.frame(width: 24, height: 24, alignment: .center)
 						}
 
 					})
+			.navigationBarColor(backgroundColor: .white, tintColor: .clear)
 			.navigationBarBackButtonHidden(true)
 
 		}
