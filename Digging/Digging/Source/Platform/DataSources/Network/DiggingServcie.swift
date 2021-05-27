@@ -15,6 +15,7 @@ enum DiggingServcie {
 	case diggingDetail(diggingID: String)
 	case totalTags(userID: String)
 	case test
+	case diggingDetailText(userID: String)
 }
 
 extension DiggingServcie: BaseService {
@@ -30,6 +31,8 @@ extension DiggingServcie: BaseService {
 				return "/api/user/get_total_tags"
 			case .test:
 				return"/posts"
+		case .diggingDetailText:
+			return "/posttext"
 		}
 	}
 	
@@ -45,7 +48,8 @@ extension DiggingServcie: BaseService {
 				return .get
 			case.test:
 				return .get
-
+		case .diggingDetailText:
+			return .get
 		}
 	}
 	
@@ -56,7 +60,7 @@ extension DiggingServcie: BaseService {
 		switch self {
 			case .createDigging:
 				return .requestCompositeParameters(bodyParameters: body, bodyEncoding: parameterEncoding, urlParameters: parameters)
-			case .diggingList, .diggingDetail, .totalTags:
+		case .diggingList, .diggingDetail, .totalTags, .diggingDetailText:
 				return .requestParameters(parameters: parameters, encoding: parameterEncoding)
 			case .test:
 				return .requestParameters(parameters: parameters, encoding: parameterEncoding)
@@ -69,7 +73,7 @@ extension DiggingServcie: BaseService {
 			"platform": "ios",
 		]
 		
-		let parameters: [String: Any] = defaultParameters
+		var parameters: [String: Any] = defaultParameters
 		
 		switch self {
 			case .createDigging:
@@ -82,7 +86,10 @@ extension DiggingServcie: BaseService {
 				return parameters
 			case .test:
 				return parameters
-
+		case .diggingDetailText(let userID):
+			// userid=13&postid=11
+			parameters.concat(dict: ["userid": userID])
+			return parameters
 		}
 	}
 	
@@ -90,7 +97,7 @@ extension DiggingServcie: BaseService {
 		switch self {
 			case .createDigging:
 				return JSONEncoding.default
-			case .diggingList, .diggingDetail, .totalTags:
+		case .diggingList, .diggingDetail, .totalTags, .diggingDetailText:
 				return URLEncoding.queryString
 			case .test:
 				return URLEncoding.queryString
