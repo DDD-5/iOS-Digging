@@ -11,7 +11,8 @@ import Combine
 
 struct DiggingTextDetailView: View {
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+	@State var recommendedTagList = ["일반 개발", "웹 개발", "Javascript", "React", "Vue.js", "Angular", "Node.js"]
+	
 	var body: some View {
 		ScrollView {
 			VStack {
@@ -26,7 +27,18 @@ struct DiggingTextDetailView: View {
 					.padding([.leading, .trailing], 20)
 				Spacer()
 
-				// TODO: merge 후 flowLayout 적용예정
+				FlowLayout(mode: .scrollable,
+						   binding: .constant(5),
+						   items: $recommendedTagList) {
+					Text($0)
+						.foregroundColor(.white)
+						.modifier(DiggingFont(type: .medium, size: 14))
+						.padding([.leading, .trailing], 14)
+						.padding([.top, .bottom], 10)
+						.background(Color.tagFillColor.cornerRadius(18))
+				}
+				.padding([.top], 24)
+				.padding([.leading, .trailing], 20)
 			}
 			.navigationBarItems(
 				leading:
