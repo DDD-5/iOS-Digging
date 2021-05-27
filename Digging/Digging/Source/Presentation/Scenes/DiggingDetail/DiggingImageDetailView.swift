@@ -47,13 +47,13 @@ struct DiggingImageDetailView: View {
 							Button(action: {
 								self.presentationMode.wrappedValue.dismiss()
 							}) {
-								Image("back_btn_img")
+								Image(R.image.back_btn_img.name)
 							}
-							Image(R.image.digging_text_folder_img.name)
+							DiggingFolderType.image.folderImage
 								.resizable()
 								.frame(width: 24, height: 24, alignment: .center)
 							
-							Text("텍스트")
+							Text("이미지")
 							
 						},
 					trailing:
