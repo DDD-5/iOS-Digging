@@ -225,6 +225,10 @@ struct CreateDiggingView: View {
       20
     )
     .padding(.bottom, 50)
+    .onAppear {
+      let testInfo = CreateTextDiggingInfo(content: "오늘의 디깅은 이거다", tags: ["Kotlin"], title: "디깅 만들자", userName: "TestUser1", userID: 13)
+      viewModel.createTextDigging(info: testInfo)
+    }
   }
 }
 

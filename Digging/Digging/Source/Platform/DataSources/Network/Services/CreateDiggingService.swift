@@ -43,8 +43,11 @@ extension CreateDiggingService: BaseService {
         "user_name": infoData.userName
       ]
       
-      return .requestCompositeParameters(bodyParameters: json, bodyEncoding:  JSONEncoding.default, urlParameters: [:])
-      
+      return .requestCompositeParameters(
+        bodyParameters: json,
+        bodyEncoding:  JSONEncoding.default,
+        urlParameters: [:]
+      )
     }
   }
 }

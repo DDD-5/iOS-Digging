@@ -16,24 +16,18 @@ protocol CreateDiggingRepository {
 
 class CreateDiggingRepositoryImpl: CreateDiggingRepository {
   
-  private let networking: NetworkingProtocol
-
-  init(networking: NetworkingProtocol) {
-    self.networking = networking
-  }
+  let provider = MoyaProvider<CreateDiggingService>()
   
   func createTextDigging(textDiggingInfo: CreateTextDiggingInfo) -> AnyPublisher<GeneralDiggingInfo, Error> {
     
-    networking.request(CreateDiggingService.createTextDigging(requiredInfo: textDiggingInfo))
-      .map({ response -> Response in
-        print("안오는데..: \(response)")
-        return response
-      })
-      .map(\.data)
-      .handleEvents( receiveOutput: { response in
-        print("This is response: \(response)")
-      })
-      .decode(type: GeneralDiggingInfo.self, decoder: JSONDecoder()
+    provider.requestPublisher(.createTextDigging(requiredInfo: textDiggingInfo)
+    ).handleEvents(receiveOutput: { response in
+      print("response: \(response)")
+    })
+    .map(\.data)
+      .decode(
+        type: GeneralDiggingInfo.self,
+        decoder: JSONDecoder()
       )
       .eraseToAnyPublisher()
   }
