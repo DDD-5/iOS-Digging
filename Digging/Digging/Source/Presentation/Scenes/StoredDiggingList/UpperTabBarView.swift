@@ -125,6 +125,8 @@ struct UpperTabBarView: View {
   // MARK: Private Helper
   
   private func isSelected(tabIdentifier: String) -> Bool {
+    guard selectionState < tabs.count else { return false }
+    
       return tabs[selectionState] == tabIdentifier
   }
   

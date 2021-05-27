@@ -12,6 +12,9 @@ let bundleID = "com.oreo.ddd.Digging"
 
 
 let bottomSheetDependancy = Package.package(url: "https://github.com/weitieda/bottom-sheet", from: "1.0.0")
+
+let lottieDependancy = Package.package(url: "https://github.com/airbnb/lottie-ios", from: "3.2.3")
+
 let targetAction = [
 	TargetAction.pre(path: "Scripts/RSwiftRunScript.sh",
 					 arguments: [],
@@ -51,7 +54,8 @@ let project = Project(
 		name: projectName,
 		organizationName: organizationName,
 		packages: [
-			bottomSheetDependancy
+			bottomSheetDependancy,
+      lottieDependancy
 		],
 		targets: [
 				Target(
@@ -72,7 +76,8 @@ let project = Project(
 						],
 						actions: targetAction,
 						dependencies: [
-							.package(product: "BottomSheet"),
+              .package(product: "BottomSheet"),
+              .package(product: "Lottie"),
 							.cocoapods(path: ".")
 						]
 					
