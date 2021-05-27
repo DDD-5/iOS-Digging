@@ -15,6 +15,14 @@ class CreateDiggingViewModel: ObservableObject {
   
   var subscriptions: Set<AnyCancellable> = .init()
   
+  @Published var addedTagList: [String] = []
+  
+  @Published var title: String = ""
+  
+  @Published var content: String = ""
+  
+  @Published var tagText: String = ""
+  
   init(useCase: CreateDiggingUseCase) {
     self.useCase = useCase
   }
@@ -22,8 +30,15 @@ class CreateDiggingViewModel: ObservableObject {
 
 extension CreateDiggingViewModel {
   
-  
-  func createTextDigging(info: CreateTextDiggingInfo) {
+  func createTextDigging() {
+    
+    let info = CreateTextDiggingInfo(
+      content: content,
+      tags: addedTagList,
+      title: title,
+      userName: "TestUser1",
+      userID: 13
+    )
     
     useCase.createTextDigging(textDiggingInfo: info)
       .sink { _ in
