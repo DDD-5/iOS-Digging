@@ -27,7 +27,7 @@ struct StoredDiggingListView: View {
         showingSheet.toggle()
       }
       .sheet(isPresented: $showingSheet) {
-        CreateDiggingView()
+        CreateDiggingView(viewModel: CreateDiggingViewModel(useCase: CreateDiggingUseCase(repository: CreateDiggingRepositoryImpl(networking: Networking(logger: [])))))
       }
       LazyVGrid(columns: [
         GridItem(.adaptive(minimum: 120, maximum: 160), spacing: 20)

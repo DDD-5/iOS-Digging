@@ -25,7 +25,14 @@ class CreateDiggingRepositoryImpl: CreateDiggingRepository {
   func createTextDigging(textDiggingInfo: CreateTextDiggingInfo) -> AnyPublisher<GeneralDiggingInfo, Error> {
     
     networking.request(CreateDiggingService.createTextDigging(requiredInfo: textDiggingInfo))
+      .map({ response -> Response in
+        print("안오는데..: \(response)")
+        return response
+      })
       .map(\.data)
+      .handleEvents( receiveOutput: { response in
+        print("This is response: \(response)")
+      })
       .decode(type: GeneralDiggingInfo.self, decoder: JSONDecoder()
       )
       .eraseToAnyPublisher()

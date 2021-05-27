@@ -44,7 +44,7 @@ struct SelectDiggingView: View {
 				})
 				.accentColor(.black)
 				.sheet(isPresented: $showingSheet) {
-					CreateDiggingView()
+          CreateDiggingView(viewModel: CreateDiggingViewModel(useCase: CreateDiggingUseCase(repository: CreateDiggingRepositoryImpl(networking: Networking(logger: [])))))
 				}
 				Button(action: {
 					showingSheet.toggle()
@@ -53,7 +53,7 @@ struct SelectDiggingView: View {
 				})
 				.accentColor(.black)
 				.sheet(isPresented: $showingSheet) {
-					CreateDiggingView()
+          CreateDiggingView(viewModel: CreateDiggingViewModel(useCase: CreateDiggingUseCase(repository: CreateDiggingRepositoryImpl(networking: Networking(logger: [])))))
 				}
 				Button(action: {
 					showingSheet.toggle()
@@ -62,7 +62,7 @@ struct SelectDiggingView: View {
 				})
 				.accentColor(.black)
 				.sheet(isPresented: $showingSheet) {
-					CreateDiggingView()
+          CreateDiggingView(viewModel: CreateDiggingViewModel(useCase: CreateDiggingUseCase(repository: CreateDiggingRepositoryImpl(networking: Networking(logger: [])))))
 				}
 			}
 		}

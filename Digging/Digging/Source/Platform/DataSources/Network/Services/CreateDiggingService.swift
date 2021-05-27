@@ -9,7 +9,7 @@
 import Moya
 
 enum CreateDiggingService {
-  case createTextDigging
+  case createTextDigging(requiredInfo: CreateTextDiggingInfo)
 }
 
 extension CreateDiggingService: BaseService {
@@ -34,8 +34,17 @@ extension CreateDiggingService: BaseService {
   
   var task: Task {
     switch self {
-    case .createTextDigging:
-      return .requestPlain
+    case let .createTextDigging(infoData):
+      let json: [String: Any] = [
+        "content": infoData.content,
+        "tags": infoData.tags,
+        "title": infoData.title,
+        "user_id": infoData.userID,
+        "user_name": infoData.userName
+      ]
+      
+      return .requestCompositeParameters(bodyParameters: json, bodyEncoding:  JSONEncoding.default, urlParameters: [:])
+      
     }
   }
 }

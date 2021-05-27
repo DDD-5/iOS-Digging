@@ -14,11 +14,11 @@ enum DiggingNetworkError: Error {
 }
 
 protocol NetworkingProtocol {
-	func request(_ target: TargetType, file: StaticString, function: StaticString, line: UInt) -> AnyPublisher<Response, DiggingNetworkError>
+	func request(_ target: TargetType, file: StaticString, function: StaticString, line: UInt) -> AnyPublisher<Response, MoyaError>
 }
 
 extension NetworkingProtocol {
-	func request(_ target: TargetType, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> AnyPublisher<Response, DiggingNetworkError> {
+	func request(_ target: TargetType, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> AnyPublisher<Response, MoyaError> {
 		return self.request(target, file: file, function: function, line: line)
 	}
 }
@@ -44,13 +44,18 @@ final class Networking: MoyaProvider<MultiTarget>, NetworkingProtocol {
 		}, session: session, plugins: logger)
 	}
 
-	func request(_ target: TargetType, file: StaticString, function: StaticString, line: UInt) -> AnyPublisher<Response, DiggingNetworkError> {
-		return self.requestPublisher(.target(target))
-			.filterSuccessfulStatusCodes()
-			.print("requestPublisher")
-			.mapError { error -> DiggingNetworkError in
-				return DiggingNetworkError.message(error.localizedDescription)
-			}
+	func request(_ target: TargetType, file: StaticString, function: StaticString, line: UInt) -> AnyPublisher<Response, MoyaError> {
+    return self.requestPublisher(.target(target)).handleEvents( receiveCancel: {
+      print("This is cancel")
+    } )//.handleEvents()
+      .handleEvents(receiveOutput: { response in
+        print("response: \(response)")
+      })
+			//.filterSuccessfulStatusCodes()
+//			.print("requestPublisher")
+//			.mapError { error -> DiggingNetworkError in
+//				return DiggingNetworkError.message(error.localizedDescription)
+//			}
 			.eraseToAnyPublisher()
 
 

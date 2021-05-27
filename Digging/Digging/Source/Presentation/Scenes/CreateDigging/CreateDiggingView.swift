@@ -62,10 +62,13 @@ struct CreateDiggingView: View {
   @State var recommendedTagList = ["일반 개발", "웹 개발", "Javascript", "React", "Vue.js", "Angular", "Node.js"]
   @State var addedTagList: [String] = []
   
+  @ObservedObject var viewModel: CreateDiggingViewModel
+  
   // TODO: temp code for test
-  init() {
+  init(viewModel: CreateDiggingViewModel) {
       UITextView.appearance().textContainerInset =
            UIEdgeInsets(top: 20, left: 50, bottom: 0, right: 12)   // << !!
+    self.viewModel = viewModel
   }
   
   var body: some View {
@@ -226,8 +229,9 @@ struct CreateDiggingView: View {
 }
 
 struct CreateDigging_Previews: PreviewProvider {
+  
   static var previews: some View {
-    CreateDiggingView()
+    CreateDiggingView(viewModel: CreateDiggingViewModel(useCase: CreateDiggingUseCase(repository: CreateDiggingRepositoryImpl(networking: Networking(logger: [])))))
   }
 }
 
