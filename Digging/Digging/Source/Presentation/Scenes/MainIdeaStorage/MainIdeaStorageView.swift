@@ -25,11 +25,12 @@ struct MainIdeaStorageView: View {
       LazyVStack {
         HStack {
           Text("Digging과 함께\n영감을 수집해요💥")
-            .font(
-              .custom("AppleSDGothicNeo-Bold", size: 24)
+            .modifier(
+              DiggingFont(type: .bold, size: 24)
             )
           Spacer()
-          Image("digging_main_top")
+          LottieView(filename: "digging_lottie")
+            .frame(width: 64, height: 64)
         }
         .ignoresSafeArea()
         .padding(
@@ -47,8 +48,17 @@ struct MainIdeaStorageView: View {
             NavigationLink(
               destination: StoredDiggingListView())
             {
-              DiggingFolderView(title: "", description: "")
-                .padding(EdgeInsets(top: 0, leading: 20, bottom: 8, trailing: 20))
+              DiggingFolderView(
+                folderType: folderInfo.type
+              )
+              .padding(
+                EdgeInsets(
+                  top: 0,
+                  leading: 20,
+                  bottom: 8,
+                  trailing: 20
+                )
+              )
             }
           }
         }

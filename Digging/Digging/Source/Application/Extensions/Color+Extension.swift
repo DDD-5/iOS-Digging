@@ -21,4 +21,10 @@ extension Color {
   
   static let cardDarkGray = Color("cardDarkGray")
   
+  static let textFieldGray = Color("textFieldGray")
+  
+  static let tagBorder = Color("tagBorder")
+  
+  static let tagFillColor = Color("tagFillColor")
+  
 }
