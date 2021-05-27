@@ -23,12 +23,10 @@ struct DiggingTextDetailView: View {
 		ScrollView {
 			VStack {
 				
-				DiggingDetailTitleView(title: "영감을 디깅하는 방법", date: "2021.04.21")
+				titleView()
 					.padding([.top], 20)
 				
-				DiggingDetailContentTextView(contentText: """
-			요즘 디깅 한다는 말을 많이 사용한다. 나도 인스타그램에 디깅을 많이 보긴 하는데 실제로 사용해본 적은 없는것 같다. 요즘 디깅 한다는 말을 많이 사용한다. 나도 인스타그램에서 디깅을 많이 보긴 하는데 실제로 사용해본 적은 없는것 같다.요즘 디깅 한다는 말을 많이 사용한다. 나도 인스타그램에서 디깅을 많이 보긴 하는데 실제로 사용해본 적은 없는것 같다. 요즘 디
-			""")
+				contentView()
 				
 				Divider()
 					.padding([.leading, .trailing], 20)
@@ -97,8 +95,19 @@ struct DiggingTextDetailView: View {
 	}
 }
 
+extension DiggingTextDetailView {
+	func titleView() -> some View {
+		return DiggingDetailTitleView(title: viewModel.textDetailDTO.title, date: viewModel.textDetailDTO.updateDate)
+	}
+	
+	func contentView() -> some View {
+		return DiggingDetailContentTextView(contentText: viewModel.textDetailDTO.content)
+	}
+}
+
 struct DiggingTextDetailView_Previews: PreviewProvider {
 	static var previews: some View {
 		DiggingTextDetailView(viewModel: DiggingTextDetailViewModel(postID: 0))
 	}
 }
+

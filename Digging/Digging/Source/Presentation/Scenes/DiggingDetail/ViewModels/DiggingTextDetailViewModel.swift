@@ -15,6 +15,8 @@ class DiggingTextDetailViewModel: ObservableObject {
 	private var cancellables = Set<AnyCancellable>()
 	private let provider: MoyaProvider<DiggingServcie> = MoyaProvider<DiggingServcie>()
 	private let postID: Int
+	@Published var textDetailDTO: DiggingTextDetailDTO = .init()
+	
 	init(postID: Int) {
 		self.postID = postID
 	}
@@ -35,10 +37,20 @@ extension DiggingTextDetailViewModel {
 
 									 print(error)
 					},
-					receiveValue: { [weak self] textInfo in
-						print(textInfo)
+					receiveValue: { [weak self] in
+						self?.generateTextDetailDTO($0)
 					}
 			)
 			.store(in: &cancellables)
+	}
+	
+	private func generateTextDetailDTO(_ info: DiggingTextInfo) {
+		self.textDetailDTO = DiggingTextDetailDTO(postID: info.postID,
+												 textID: info.textID,
+												 title: info.titile,
+												 content: info.content,
+												 updatedAt: info.updatedAt,
+												 isLike: info.isLike,
+												 tags: info.tags)
 	}
 }
