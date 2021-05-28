@@ -16,7 +16,7 @@ class DiggingTextDetailViewModel: ObservableObject {
 	private let provider: MoyaProvider<DiggingServcie> = MoyaProvider<DiggingServcie>()
 	private let postID: Int
 	@Published var textDetailDTO: DiggingTextDetailDTO = .init()
-	
+	@Published var tags: [String] = []
 	init(postID: Int) {
 		self.postID = postID
 	}
@@ -51,5 +51,7 @@ extension DiggingTextDetailViewModel {
 												 updatedAt: info.updatedAt,
 												 isLike: info.isLike,
 												 tags: info.tags)
+		self.tags = info.tags
+
 	}
 }

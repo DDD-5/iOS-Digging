@@ -11,7 +11,6 @@ import Combine
 
 struct DiggingTextDetailView: View {
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-	@State var recommendedTagList = ["일반 개발", "웹 개발", "Javascript", "React", "Vue.js", "Angular", "Node.js"]
 	@ObservedObject var viewModel: DiggingTextDetailViewModel
 	
 	init(viewModel: DiggingTextDetailViewModel) {
@@ -31,10 +30,10 @@ struct DiggingTextDetailView: View {
 				Divider()
 					.padding([.leading, .trailing], 20)
 				Spacer()
-				
+
 				FlowLayout(mode: .scrollable,
 									 binding: .constant(5),
-									 items: $recommendedTagList) {
+									 items: $viewModel.tags) {
 					Text($0)
 						.foregroundColor(.white)
 						.modifier(DiggingFont(type: .medium, size: 14))
