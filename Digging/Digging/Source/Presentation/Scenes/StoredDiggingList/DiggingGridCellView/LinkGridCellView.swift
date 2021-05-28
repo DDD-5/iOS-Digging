@@ -8,13 +8,25 @@
 import SwiftUI
 
 struct LinkGridCellView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  
+  let diggingInfo: GeneralDiggingInfo
+  
+  @State var redraw: Bool = false
+  
+  var body: some View {
+    DiggingGridCellView {
+      if let urlString = diggingInfo.url,
+         let url = URL(string: urlString) {
+        URLInfoPreView(url: url, redraw: $redraw)
+      }
     }
+  }
 }
 
 struct LinkGridCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        LinkGridCellView()
-    }
+  @State static var redraw: Bool = false
+  
+  static var previews: some View {
+    LinkGridCellView(diggingInfo: GeneralDiggingInfo(content: nil, url: "https://www.naver.com", postID: 0, type: nil, title: nil), redraw: redraw)
+  }
 }

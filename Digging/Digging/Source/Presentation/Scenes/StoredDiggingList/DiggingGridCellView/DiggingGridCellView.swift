@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Rswift
 
 struct DiggingGridCellView<T: View>: View {
   
@@ -15,7 +16,7 @@ struct DiggingGridCellView<T: View>: View {
   
   var likeButtonView: Button<Image> {
     return Button(action: {}, label: {
-      Image.init("")
+      Image(systemName: "suit.heart")
     })
   }
   
@@ -26,7 +27,7 @@ struct DiggingGridCellView<T: View>: View {
   var body: some View {
     
     GeometryReader { geometry in
-      ZStack {
+      ZStack(alignment: .topLeading) {
         Color(red: 246/255, green: 246/255, blue: 246/255)
           .cornerRadius(10)
         content
