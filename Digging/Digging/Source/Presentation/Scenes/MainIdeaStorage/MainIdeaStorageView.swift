@@ -74,12 +74,10 @@ struct MainIdeaStorageView: View {
           columns: gridLayout,
           alignment: .leading,
           spacing: 15,
-          content: {
-            
-            
+          content: {   
             ForEach(viewModel.recentDiggingList, id: \.postID) { diggingInfo in
               NavigationLink(
-                destination: DiggingTextDetailView(),
+                destination: DiggingTextDetailView(viewModel: DiggingTextDetailViewModel(postID: 2)),
                 label: {
                   determineProperDiggingCellView(diggingInfo: diggingInfo)
                     .frame(height: 160)

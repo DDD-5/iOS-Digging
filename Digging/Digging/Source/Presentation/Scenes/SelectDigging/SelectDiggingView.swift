@@ -55,7 +55,7 @@ struct SelectDiggingView: View {
 				Button(action: {
 					showingSheet.toggle()
 				}, label: {
-					SelectDiggingCategoryView(title: "사진", image: R.image.digging_text_folder_img.name)
+					SelectDiggingCategoryView(title: "사진", image: R.image.digging_image_folder_img.name)
 				})
 				.accentColor(.black)
 				.sheet(isPresented: $showingSheet) {
@@ -70,7 +70,7 @@ struct SelectDiggingView: View {
 				Button(action: {
 					showingSheet.toggle()
 				}, label: {
-					SelectDiggingCategoryView(title: "링크", image: R.image.digging_text_folder_img.name)
+					SelectDiggingCategoryView(title: "링크", image: R.image.digging_link_folder_img.name)
 				})
 				.accentColor(.black)
 				.sheet(isPresented: $showingSheet) {

@@ -69,8 +69,7 @@ struct SettingAppSuggestionView: View {
 			}
 
 		}
-		.navigationBarBackButtonHidden(true)
-		.navigationBarTitle("앱 문의/건의", displayMode: .inline)
+		.navigationBarTitle(Text("앱 문의/건의"), displayMode: .inline)
 		.navigationBarItems(leading:
 								Button(action: {
 									self.presentationMode.wrappedValue.dismiss()
@@ -78,7 +77,7 @@ struct SettingAppSuggestionView: View {
 									Image("back_btn_img")
 								})
 		)
-
+		.navigationBarBackButtonHidden(true)
 	}
 }
 
