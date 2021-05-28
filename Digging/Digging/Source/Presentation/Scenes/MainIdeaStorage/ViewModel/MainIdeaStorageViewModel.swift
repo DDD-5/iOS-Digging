@@ -83,7 +83,7 @@ class MainIdeaStorageViewModel: ObservableObject {
   init(useCase: MainIdeaStorageUseCase) {
     self.useCase = useCase
     self.folderInfoArray = baseFolderInformations()
-    requestRecentDiggings(userID: 13)
+    requestRecentDiggings(userID: 1)
   }
   
   private func baseFolderInformations() -> [DiggingFolderInfo] {
