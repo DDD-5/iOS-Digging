@@ -12,7 +12,9 @@ struct MainIdeaStorageView: View {
   // MARK: - Properties
   
   @ObservedObject
-  var viewModel = MainIdeaStorageViewModel()
+  var viewModel = MainIdeaStorageViewModel(
+    useCase: MainIdeaStorageUseCase(repository: MainIdeaStorageRepositoryImpl())
+  )
   
   var gridLayout = [
     GridItem(.adaptive(minimum: 160, maximum: 160), spacing: 15)
@@ -73,26 +75,43 @@ struct MainIdeaStorageView: View {
           alignment: .leading,
           spacing: 15,
           content: {
-						NavigationLink(
-							destination: DiggingTextDetailView(),
-							label: {
-								DiggingGridCellView {
-									
-								}.frame(height: 160)
-							})
-						NavigationLink(
-							destination: DiggingLinkDetailView(),
-							label: {
-								DiggingGridCellView {
-									
-								}.frame(height: 160)
-							})
+            
+            
+            ForEach(viewModel.recentDiggingList, id: \.postID) { diggingInfo in
+              NavigationLink(
+                destination: DiggingTextDetailView(),
+                label: {
+                  determineProperDiggingCellView(diggingInfo: diggingInfo)
+                    .frame(height: 160)
+                })
+            }
         })
         .padding([.leading, .trailing], 20)
       }
       Spacer(minLength: 30)
     }
     .navigationBarHidden(true)
+    .onAppear {
+      DispatchQueue.global().async {
+        viewModel.requestRecentDiggings(userID: 13)
+      }
+    }
+  }
+  
+  func determineProperDiggingCellView(diggingInfo: GeneralDiggingInfo) -> AnyView {
+    
+    guard let typeString = diggingInfo.type, let type = DiggingFolderType(rawValue: typeString) else {
+      return AnyView(DiggingGridCellView { })
+    }
+    
+    switch type {
+    case .text:
+      return AnyView(TextGridCellView(diggingInfo: diggingInfo))
+    case .image:
+      return AnyView(ImageGridCellView())
+    case .link:
+      return AnyView(LinkGridCellView(diggingInfo: diggingInfo))
+    }
   }
 }
 

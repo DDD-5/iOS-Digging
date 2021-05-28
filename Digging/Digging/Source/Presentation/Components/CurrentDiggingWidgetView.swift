@@ -9,13 +9,21 @@
 import SwiftUI
 
 struct CurrentDiggingWidgetView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  var body: some View {
+    VStack {
+      Text("")
+      HStack {
+        Image(R.image.digging_link_folder_small_img.name)
+        Text("")
+        Text("")
+      }
+      Text("")
     }
+  }
 }
 
 struct CurrentDiggingWidgetView_Previews: PreviewProvider {
-    static var previews: some View {
-        CurrentDiggingWidgetView()
-    }
+  static var previews: some View {
+    CurrentDiggingWidgetView()
+  }
 }

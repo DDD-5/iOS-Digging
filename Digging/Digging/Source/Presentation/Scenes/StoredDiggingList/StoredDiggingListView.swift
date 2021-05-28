@@ -22,16 +22,14 @@ struct StoredDiggingListView: View {
   var body: some View {
     VStack(alignment: .leading) {
       DiggingListNavigationBar()
-      UpperTabBarView(selection: $selection, tabs: ["전체", "좋아요"])
-      Button("Show Sheet") {
-        showingSheet.toggle()
-      }
-      .sheet(isPresented: $showingSheet) {
-        CreateDiggingView(viewModel: CreateDiggingViewModel(useCase: CreateDiggingUseCase(repository: CreateDiggingRepositoryImpl(networking: Networking(logger: [])))))
-      }
+      UpperTabBarView(
+        selection: $selection,
+        tabs: ["전체", "좋아요"]
+      )
       LazyVGrid(columns: [
         GridItem(.adaptive(minimum: 120, maximum: 160), spacing: 20)
       ], content: {
+        
         DiggingGridCellView {
           
         }.frame(height: 160)

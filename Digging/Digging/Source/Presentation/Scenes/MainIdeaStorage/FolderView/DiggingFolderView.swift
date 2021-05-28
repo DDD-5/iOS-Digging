@@ -16,7 +16,7 @@ struct DiggingFolderView: View {
       folderType.folderImage
       VStack {
         HStack {
-          Text(folderType.rawValue)
+          Text(folderType.typeName)
             .font(
               .custom("AppleSDGothicNeo-Bold", size: 16)
             )
