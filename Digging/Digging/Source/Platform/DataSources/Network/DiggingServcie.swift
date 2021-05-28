@@ -88,7 +88,7 @@ extension DiggingServcie: BaseService {
 				return parameters
 		case .diggingDetailText(let postID):
 			// TODO: Userdefault 활용 예정, 의견 필요 하며, 추후 헤더에 토큰 주입시 불필요하여, 고정 값 처리
-			let userID = 13 //
+			let userID = 1 //
 			parameters.concat(dict: ["userid": userID, "postid": postID])
 			return parameters
 		}

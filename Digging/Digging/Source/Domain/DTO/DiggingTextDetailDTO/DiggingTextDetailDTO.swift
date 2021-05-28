@@ -27,7 +27,9 @@ extension DiggingTextDetailDTO {
 		isLike = false
 		tags = []
 	}
+
 	var updateDate: String {
+
 		return dateToString(updatedAt, dateFormat: "yyyy.MM.dd")
 	}
 }
@@ -36,9 +38,11 @@ extension DiggingTextDetailDTO {
 // TODO: 공통 코드 처리 예정
 
 func dateToString(_ dateAt: String, dateFormat: String) -> String {
-	let formatter = ISO8601DateFormatter()
-	formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-	guard let createdDate = formatter.date(from: dateAt) else { return ""}
+	let dateFormatter = DateFormatter()
+	dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+	dateFormatter.locale = Locale(identifier: "ko-kr")
+
+	guard let createdDate = dateFormatter.date(from: dateAt) else { return ""}
 	let createdText = createdDate.toString(dateFormat: dateFormat)
 	return createdText
 }
@@ -47,7 +51,6 @@ extension Date {
 	func toString(dateFormat: String, timezone: TimeZone? = .autoupdatingCurrent) -> String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = dateFormat
-		dateFormatter.timeZone = timezone
 		dateFormatter.locale = Locale(identifier: "ko-kr")
 
 		return dateFormatter.string(from: self)

@@ -24,7 +24,6 @@ class DiggingTextDetailViewModel: ObservableObject {
 
 extension DiggingTextDetailViewModel {
 	func fetchDiggingTextInfo() {
-//		let provider: MoyaProvider<DiggingServcie> = MoyaProvider<DiggingServcie>()
 		self.provider.requestPublisher(.diggingDetailText(postID: postID))
 			.print("-- diggingDetailText --")
 			.receive(on: DispatchQueue.main)
