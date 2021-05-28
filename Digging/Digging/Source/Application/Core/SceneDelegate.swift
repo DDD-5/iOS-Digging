@@ -18,12 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     
     // Create the SwiftUI view that provides the window contents.
-    let mainTabBarView = MainTabBarView()
+    let spalshView = SplashView()
     
     // Use a UIHostingController as window root view controller.
     if let windowScene = scene as? UIWindowScene {
       let window = UIWindow(windowScene: windowScene)
-      window.rootViewController = UIHostingController(rootView: mainTabBarView)
+      window.rootViewController = UIHostingController(rootView: spalshView)
       self.window = window
       window.makeKeyAndVisible()
     }
@@ -58,3 +58,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
 }
 
+extension UIWindow {
+	func switchRootViewController(rootViewController: UIViewController, animated: Bool, completion: (() -> Void)?) {
+		guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return }
+		if animated {
+			UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
+				let oldState: Bool = UIView.areAnimationsEnabled
+				UIView.setAnimationsEnabled(false)
+				window.rootViewController = rootViewController
+				UIView.setAnimationsEnabled(oldState)
+			}, completion: { _ in
+				if completion != nil {
+					completion!()
+				}
+			})
+		} else {
+			window.rootViewController = rootViewController
+		}
+	}
+}
