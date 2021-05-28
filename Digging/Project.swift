@@ -16,6 +16,7 @@ let bottomSheetDependancy = Package.package(url: "https://github.com/weitieda/bo
 let lottieDependancy = Package.package(url: "https://github.com/airbnb/lottie-ios", from: "3.2.3")
 
 let targetAction = [
+  
 	TargetAction.pre(path: "Scripts/RSwiftRunScript.sh",
 					 arguments: [],
 					 name: "R.Swift",
@@ -82,7 +83,21 @@ let project = Project(
 							.cocoapods(path: ".")
 						]
 					
-				)
+				),
+      Target(name: "DiggingWidget",
+             platform: .iOS,
+             product: .appExtension,
+             bundleId: "com.oreo.ddd.Digging.DiggingWidget",
+             infoPlist: .extendingDefault(with: [
+                 "CFBundleDisplayName": "$(PRODUCT_NAME)",
+                 "NSExtension": [
+                         "NSExtensionPointIdentifier": "com.apple.widgetkit-extension"
+                     ]
+             ]),
+             sources: "DiggingWidget/**",
+             dependencies: [
+                                  
+       ])
 		]
 
 )

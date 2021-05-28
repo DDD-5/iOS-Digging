@@ -28,13 +28,14 @@ struct TextArea: View {
   var body: some View {
     ZStack(alignment: .topLeading) {
       TextEditor(text: $text)
-        .foregroundColor(Color.primary.opacity(0.25))
-        .padding(EdgeInsets(top: 0, leading: 4, bottom: 7, trailing: 0))
-        .textContentType(.none)
+      
       if text.isEmpty {
         Text(placeholder)
-          .foregroundColor(Color(UIColor.placeholderText)).padding(.horizontal, 16)
-          .padding(.vertical, 12.1)
+          .foregroundColor(Color(UIColor.placeholderText))
+          .padding(.horizontal, 12)
+          .padding(.vertical, 12)
+          .allowsHitTesting(false)
+          .modifier(DiggingFont(type: .regular, size: 14))
       }
     }
   }
@@ -49,26 +50,46 @@ struct CustomTextField: View {
   var body: some View {
     ZStack(alignment: .leading) {
       TextEditor(text: $text)
-      if text.isEmpty { placeholder }
+      if text.isEmpty {
+        placeholder
+          .foregroundColor(Color(UIColor.placeholderText))
+          .modifier(DiggingFont(type: .regular, size: 14))
+          .allowsTightening(false)
+          .padding(.leading, 12)
+      }
     }
   }
 }
 
 struct CreateDiggingView: View {
-  @State var title: String = ""
-  @State var tagText: String = ""
-  @State var description: String = ""
-  @State var text: String = ""
   @State var recommendedTagList = ["일반 개발", "웹 개발", "Javascript", "React", "Vue.js", "Angular", "Node.js"]
-  @State var addedTagList: [String] = []
+  
+  let diggingType: DiggingFolderType
+  
+  @ObservedObject var viewModel: CreateDiggingViewModel
   
   // TODO: temp code for test
-  init() {
-      UITextView.appearance().textContainerInset =
-           UIEdgeInsets(top: 20, left: 50, bottom: 0, right: 12)   // << !!
+  init(
+    type: DiggingFolderType,
+    viewModel: CreateDiggingViewModel
+  ) {
+    self.diggingType = type
+    self.viewModel = viewModel
+    self.setProperties()
+  }
+  
+  private func setProperties() {
+    UITextView.appearance().textContainerInset =
+      UIEdgeInsets(
+        top: 12,
+        left: 5,
+        bottom: 0,
+        right: 5
+      )
   }
   
   var body: some View {
+    
     ZStack {
       ScrollView {
         VStack {
@@ -81,8 +102,8 @@ struct CreateDiggingView: View {
           .padding([.top, .trailing], 20)
           
           HStack {
-            Image("digging_text_folder_small_img")
-            Text("텍스트")
+            diggingType.smallImage
+            Text(diggingType.typeName)
             Spacer()
           }
           .padding([.leading], 20)
@@ -93,12 +114,11 @@ struct CreateDiggingView: View {
                 .font(.custom("AppleSDGothicNeo-Medium", size: 14)
                 )
               Spacer()
-              Text("0/10")
+              Text("\(viewModel.title.count)/10")
                 .font(.custom("AppleSDGothicNeo-Regular", size: 13)
                 )
             }
-            
-            TextField(LocalizedStringKey("  10자 이내로 제목을 입력해주세요."), text: $title)
+            CustomTextField(placeholder: Text("10자 이내로 제목을 입력해주세요."), text: $viewModel.title)
               .frame(height: 44)
               .overlay(
                 RoundedRectangle(cornerRadius: 8)
@@ -106,33 +126,51 @@ struct CreateDiggingView: View {
               )
           }
           .padding([.leading, .trailing], 20)
-          
+          .padding(.top, 38)
           
           HStack {
-            Text("내용")
+            Text(diggingType.contentName)
               .font(.custom("AppleSDGothicNeo-Medium", size: 14)
               )
             Spacer()
-            Text("0/200")
-              .font(.custom("AppleSDGothicNeo-Regular", size: 13)
-              )
+            if diggingType == .text {
+              Text("\(viewModel.content.count)/200")
+                .modifier(DiggingFont(type: .regular, size: 13))
+            }
           }
           .padding([.leading, .trailing], 20)
-          TextArea("10자 이내로 제목을 입력해주세요.", text: $text)
-            .frame(height: 143.9)
-            .overlay(
-              RoundedRectangle(cornerRadius: 8)
-                .stroke(Color(red: 229 / 255, green: 229 / 255, blue: 229 / 255), lineWidth: 1)
-            )
-            .padding([.leading, .trailing], 20)
+          .padding(.top, 31)
+          
+          switch diggingType {
+          case .text:
+            TextArea("내용을 입력해주세요.", text: $viewModel.content)
+              .frame(height: 143.9)
+              .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                  .stroke(Color(red: 229 / 255, green: 229 / 255, blue: 229 / 255), lineWidth: 1)
+              )
+              .padding([.leading, .trailing], 20)
+          case .image:
+            Text("")
+          case .link:
+            CustomTextField(placeholder: Text("복사한 링크를 붙여 넣거나, 직접 입력해주세요."), text: $viewModel.linkText)
+              .frame(height: 44)
+              .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                  .stroke(Color.grayBorder, lineWidth: 1)
+              )
+              .padding([.leading, .trailing], 20)
+          }
+          
           HStack {
             Text("태그")
               .modifier(DiggingFont(type: .medium, size: 14))
             Spacer()
           }
           .padding([.leading, .trailing], 20)
+          .padding(.top, 27)
           HStack {
-            TextField(LocalizedStringKey("추천 태그를 선택하거나, 직접 입력해주세요."), text: $tagText)
+            CustomTextField(placeholder: Text("추천 태그를 선택하거나, 직접 입력해주세요."), text: $viewModel.tagText)
               .frame(width: 274, height: 44)
               .overlay(
                 RoundedRectangle(cornerRadius: 8)
@@ -144,8 +182,8 @@ struct CreateDiggingView: View {
               .padding(.trailing, 8)
             
             Button(action: {
-              if !addedTagList.contains(tagText) {
-                addedTagList.append(tagText)
+              if !viewModel.addedTagList.contains(viewModel.tagText) {
+                viewModel.addedTagList.append(viewModel.tagText)
               }
             }, label: {
               Text("입력")
@@ -170,9 +208,9 @@ struct CreateDiggingView: View {
           )
         }
         FlowLayout(mode: .scrollable,
-                                   binding: .constant(5),
-                                   items: $recommendedTagList) {
-          Text($0)
+                   binding: .constant(5),
+                   items: $recommendedTagList) { inputText in
+          Text(inputText)
             .modifier(DiggingFont(type: .medium, size: 14))
             .padding([.leading, .trailing], 14)
             .padding([.top, .bottom], 10)
@@ -183,7 +221,10 @@ struct CreateDiggingView: View {
                   lineWidth: 1
                 )
             )
-                                   
+            .onTapGesture(count: 1) {
+              viewModel.addedTagList.append(inputText)
+            }
+          
         }
         .padding()
         
@@ -192,8 +233,8 @@ struct CreateDiggingView: View {
           .padding([.leading, .trailing], 20)
         
         FlowLayout(mode: .scrollable,
-                                   binding: .constant(5),
-                                   items: $addedTagList) {
+                   binding: .constant(5),
+                   items: $viewModel.addedTagList) {
           Text($0)
             .foregroundColor(.white)
             .modifier(DiggingFont(type: .medium, size: 14))
@@ -204,7 +245,17 @@ struct CreateDiggingView: View {
         .padding()
       }
     }
-    Button(action: {}, label: {
+    Button(action: {
+      switch diggingType {
+      case .text:
+        viewModel.createTextDigging()
+      case .image:
+        viewModel.createTextDigging()
+      case .link:
+        viewModel.createLinkDigging()
+      }
+      
+    }, label: {
       Text("작성 완료😀")
         .modifier(
           DiggingFont(
@@ -226,8 +277,15 @@ struct CreateDiggingView: View {
 }
 
 struct CreateDigging_Previews: PreviewProvider {
+  
   static var previews: some View {
-    CreateDiggingView()
+    CreateDiggingView(
+      type: .text,
+      viewModel: CreateDiggingViewModel(
+        useCase: CreateDiggingUseCase(repository: CreateDiggingRepositoryImpl()
+        )
+      )
+    )
   }
 }
 

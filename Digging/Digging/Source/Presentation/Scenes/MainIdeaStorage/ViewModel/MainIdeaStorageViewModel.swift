@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import Combine
 
 enum DiggingFolderType: String {
-  case text = "텍스트"
-  case image = "사진"
-  case link = "링크"
+  case text = "text"
+  case image = "image"
+  case link = "link"
   
   var sequenceNumber: Int {
     switch self {
@@ -30,16 +31,59 @@ enum DiggingFolderType: String {
       return Image(R.image.digging_link_folder_img.name)
     }
   }
+  
+  var smallImage: Image {
+    switch self {
+    case .text:
+      return Image(R.image.digging_text_folder_small_img.name)
+    case .image:
+      return Image(R.image.digging_image_folder_img.name)
+    case .link:
+      return Image(R.image.digging_link_folder_small_img.name)
+    }
+  }
+  
+  var typeName: String {
+    switch self {
+    case .text:
+      return "텍스트"
+    case .image:
+      return "이미지"
+    case .link:
+      return "링크"
+    }
+  }
+  
+  var contentName: String {
+    switch self {
+    case .text:
+      return "내용"
+    case .image:
+      return "이미지"
+    case .link:
+      return "링크"
+    }
+  }
 }
 
 class MainIdeaStorageViewModel: ObservableObject {
+  
+  let useCase: MainIdeaStorageUseCase
+  
+  var subscriptions: Set<AnyCancellable> = .init()
+  
+  
   
   // MARK: - Published Properties
   
   @Published var folderInfoArray: [DiggingFolderInfo] = []
   
-  init() {
+  @Published var recentDiggingList: [GeneralDiggingInfo] = []
+  
+  init(useCase: MainIdeaStorageUseCase) {
+    self.useCase = useCase
     self.folderInfoArray = baseFolderInformations()
+    requestRecentDiggings(userID: 13)
   }
   
   private func baseFolderInformations() -> [DiggingFolderInfo] {
@@ -57,6 +101,16 @@ class MainIdeaStorageViewModel: ObservableObject {
       ]
     )
     return folderInfoArray
+  }
+  
+  func requestRecentDiggings(userID: Int) {
+    useCase.requestRecentDiggings(userID: userID).sink { _ in
+      print("Completed")
+    } receiveValue: { [weak self] diggingInfo in
+      print("\(diggingInfo)")
+      self?.recentDiggingList = diggingInfo
+    }
+    .store(in: &subscriptions)
   }
 }
 
