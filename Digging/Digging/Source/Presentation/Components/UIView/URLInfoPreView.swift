@@ -14,8 +14,6 @@ struct URLInfoPreView: UIViewRepresentable {
   
   let url: URL
   
-  let provider = LPMetadataProvider()
-  
   @Binding var redraw: Bool
   
   func makeUIView(context: Context) -> UIView {
@@ -23,6 +21,7 @@ struct URLInfoPreView: UIViewRepresentable {
     let linkView = LPLinkView(url: url)
     view.addSubview(linkView)
     linkView.translatesAutoresizingMaskIntoConstraints = false
+		let provider = LPMetadataProvider()
     provider.startFetchingMetadata(for: url) { metaData, error in
       guard
           let metaData = metaData,
