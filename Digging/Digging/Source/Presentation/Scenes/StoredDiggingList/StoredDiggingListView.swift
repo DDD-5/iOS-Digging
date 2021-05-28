@@ -32,8 +32,8 @@ struct StoredDiggingListView: View {
         
         DiggingGridCellView {
           
-        }.frame(height: 160)
-        
+        }
+        .frame(height: 160)
       })
       Spacer()
     }

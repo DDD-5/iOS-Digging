@@ -25,6 +25,8 @@ class CreateDiggingViewModel: ObservableObject {
   
   @Published var linkText: String = ""
   
+  @Published var popupPresented: Bool = false
+  
   init(useCase: CreateDiggingUseCase) {
     self.useCase = useCase
   }
@@ -38,8 +40,8 @@ extension CreateDiggingViewModel {
       content: content,
       tags: addedTagList,
       title: title,
-      userName: "TestUser1",
-      userID: 13
+      userName: "oreo",
+      userID: 1
     )
     
     useCase.createTextDigging(textDiggingInfo: info)
@@ -57,14 +59,15 @@ extension CreateDiggingViewModel {
       url: linkText,
       tags: addedTagList,
       title: title,
-      userName: "TestUser1",
-      userID: 13
+      userName: "oreo",
+      userID: 1
     )
     
     useCase.createLinkDigging(linkDiggingInfo: info)
       .sink { _ in
         print("completed")
-      } receiveValue: { info in
+      } receiveValue: { [weak self] info in
+        self?.popupPresented.toggle()
         print("Received : \(info)")
       }
       .store(in: &subscriptions)

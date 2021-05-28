@@ -72,7 +72,7 @@ class MainIdeaStorageViewModel: ObservableObject {
   
   var subscriptions: Set<AnyCancellable> = .init()
   
-  
+//  let subject = PassthroughSubject<Void, Never>()
   
   // MARK: - Published Properties
   
@@ -83,7 +83,7 @@ class MainIdeaStorageViewModel: ObservableObject {
   init(useCase: MainIdeaStorageUseCase) {
     self.useCase = useCase
     self.folderInfoArray = baseFolderInformations()
-    requestRecentDiggings(userID: 1)
+    //requestRecentDiggings(userID: 1)
   }
   
   private func baseFolderInformations() -> [DiggingFolderInfo] {
@@ -104,7 +104,8 @@ class MainIdeaStorageViewModel: ObservableObject {
   }
   
   func requestRecentDiggings(userID: Int) {
-    useCase.requestRecentDiggings(userID: userID).sink { _ in
+    useCase.requestRecentDiggings(userID: userID)
+      .sink { _ in
       print("Completed")
     } receiveValue: { [weak self] diggingInfo in
       print("\(diggingInfo)")

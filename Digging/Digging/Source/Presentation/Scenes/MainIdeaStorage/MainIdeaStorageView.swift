@@ -100,9 +100,7 @@ struct MainIdeaStorageView: View {
     }
     .navigationBarHidden(true)
     .onAppear {
-      DispatchQueue.global().async {
-        viewModel.requestRecentDiggings(userID: 13)
-      }
+      viewModel.requestRecentDiggings(userID: 1)
     }
   }
   

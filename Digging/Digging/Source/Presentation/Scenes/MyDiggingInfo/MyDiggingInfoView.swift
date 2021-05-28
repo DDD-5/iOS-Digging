@@ -26,7 +26,7 @@ struct MyDiggingInfoView: View {
     ScrollView {
       VStack(alignment: .leading) {
         HStack {
-          Text("이름없음님의\n디깅 내역")
+          Text("오레오님의\n디깅 내역")
             .modifier(
               DiggingFont(
                 type: .bold,
