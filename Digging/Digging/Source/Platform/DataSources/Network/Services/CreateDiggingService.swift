@@ -10,6 +10,7 @@ import Moya
 
 enum CreateDiggingService {
   case createTextDigging(requiredInfo: CreateTextDiggingInfo)
+  case createLinkDigging(requiredInfo: CreateLinkDiggingInfo)
 }
 
 extension CreateDiggingService: BaseService {
@@ -18,6 +19,8 @@ extension CreateDiggingService: BaseService {
     switch self {
     case .createTextDigging:
       return "posttext"
+    case .createLinkDigging:
+      return "postlink"
     }
   }
   
@@ -25,11 +28,9 @@ extension CreateDiggingService: BaseService {
     switch self {
     case .createTextDigging:
       return .post
+    case .createLinkDigging:
+      return .post
     }
-  }
-  
-  var sampleData: Data {
-    Data()
   }
   
   var task: Task {
@@ -37,6 +38,21 @@ extension CreateDiggingService: BaseService {
     case let .createTextDigging(infoData):
       let json: [String: Any] = [
         "content": infoData.content,
+        "tags": infoData.tags,
+        "title": infoData.title,
+        "user_id": infoData.userID,
+        "user_name": infoData.userName
+      ]
+      
+      return .requestCompositeParameters(
+        bodyParameters: json,
+        bodyEncoding:  JSONEncoding.default,
+        urlParameters: [:]
+      )
+      
+    case let .createLinkDigging(infoData):
+      let json: [String: Any] = [
+        "url": infoData.url,
         "tags": infoData.tags,
         "title": infoData.title,
         "user_id": infoData.userID,

@@ -23,4 +23,8 @@ extension CreateDiggingUseCase {
   func createTextDigging(textDiggingInfo: CreateTextDiggingInfo) -> AnyPublisher<GeneralDiggingInfo, Error> {
     return repository.createTextDigging(textDiggingInfo: textDiggingInfo)
   }
+  
+  func createLinkDigging(linkDiggingInfo: CreateLinkDiggingInfo) -> AnyPublisher<GeneralDiggingInfo, Error> {
+    return repository.createLinkDigging(linkDiggingInfo: linkDiggingInfo)
+  }
 }

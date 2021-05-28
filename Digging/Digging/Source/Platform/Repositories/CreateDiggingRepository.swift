@@ -12,6 +12,8 @@ import Moya
 
 protocol CreateDiggingRepository {
   func createTextDigging(textDiggingInfo: CreateTextDiggingInfo) -> AnyPublisher<GeneralDiggingInfo, Error>
+  
+  func createLinkDigging(linkDiggingInfo: CreateLinkDiggingInfo) -> AnyPublisher<GeneralDiggingInfo, Error>
 }
 
 class CreateDiggingRepositoryImpl: CreateDiggingRepository {
@@ -25,10 +27,24 @@ class CreateDiggingRepositoryImpl: CreateDiggingRepository {
       print("response: \(response)")
     })
     .map(\.data)
-      .decode(
-        type: GeneralDiggingInfo.self,
-        decoder: JSONDecoder()
-      )
-      .eraseToAnyPublisher()
+    .decode(
+      type: GeneralDiggingInfo.self,
+      decoder: JSONDecoder()
+    )
+    .eraseToAnyPublisher()
+  }
+  
+  func createLinkDigging(linkDiggingInfo: CreateLinkDiggingInfo) -> AnyPublisher<GeneralDiggingInfo, Error> {
+    
+    provider.requestPublisher(.createLinkDigging(requiredInfo: linkDiggingInfo)
+    ).handleEvents(receiveOutput: { response in
+      print("response: \(response)")
+    })
+    .map(\.data)
+    .decode(
+      type: GeneralDiggingInfo.self,
+      decoder: JSONDecoder()
+    )
+    .eraseToAnyPublisher()
   }
 }
