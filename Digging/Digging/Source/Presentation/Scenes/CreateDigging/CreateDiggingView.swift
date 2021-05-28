@@ -66,6 +66,8 @@ struct CreateDiggingView: View {
   
   let diggingType: DiggingFolderType
   
+  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+  
   @ObservedObject var viewModel: CreateDiggingViewModel
   
   // TODO: temp code for test
@@ -272,7 +274,11 @@ struct CreateDiggingView: View {
       [.leading, .trailing],
       20
     )
-    .padding(.bottom, 50)
+    .padding(.bottom, 50).alert(isPresented: $viewModel.popupPresented, content: { () -> Alert in
+      Alert(title: Text("링크 Digging을 추가하였습니다"), message: nil, dismissButton: .default(Text("확인"), action: {
+        self.presentationMode.wrappedValue.dismiss()
+      }))
+    })
   }
 }
 
