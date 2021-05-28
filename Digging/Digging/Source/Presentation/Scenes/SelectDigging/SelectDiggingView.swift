@@ -11,6 +11,10 @@ import SwiftUI
 struct SelectDiggingView: View {
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 	@State var showingSheet = false
+	@State var showSheetText = false
+	@State var showSheetLink = false
+	@State var showSheetImage = false
+	
 	var body: some View {
 
 		VStack(spacing: 0) {
@@ -38,14 +42,14 @@ struct SelectDiggingView: View {
 			
 			VStack {
 				Button(action: {
-					showingSheet.toggle()
+					showSheetText.toggle()
 				}, label: {
 					SelectDiggingCategoryView(title: "텍스트", image: R.image.digging_text_folder_img.name)
 				})
 				.accentColor(.black)
-				.sheet(isPresented: $showingSheet) {
+				.sheet(isPresented: $showSheetText) {
           CreateDiggingView(
-            type: .link,
+            type: .text,
             viewModel: CreateDiggingViewModel(
               useCase: CreateDiggingUseCase(repository: CreateDiggingRepositoryImpl()
               )
@@ -53,12 +57,12 @@ struct SelectDiggingView: View {
           )
 				}
 				Button(action: {
-					showingSheet.toggle()
+					showSheetImage.toggle()
 				}, label: {
 					SelectDiggingCategoryView(title: "사진", image: R.image.digging_image_folder_img.name)
 				})
 				.accentColor(.black)
-				.sheet(isPresented: $showingSheet) {
+				.sheet(isPresented: $showSheetImage) {
           CreateDiggingView(
             type: .image,
             viewModel: CreateDiggingViewModel(
@@ -68,12 +72,12 @@ struct SelectDiggingView: View {
           )
 				}
 				Button(action: {
-					showingSheet.toggle()
+					showSheetLink.toggle()
 				}, label: {
 					SelectDiggingCategoryView(title: "링크", image: R.image.digging_link_folder_img.name)
 				})
 				.accentColor(.black)
-				.sheet(isPresented: $showingSheet) {
+				.sheet(isPresented: $showSheetLink) {
           CreateDiggingView(
             type: .link,
             viewModel: CreateDiggingViewModel(
