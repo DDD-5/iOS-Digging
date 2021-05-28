@@ -72,7 +72,8 @@ let project = Project(
 							"\(projectName)/Source/**"
 						],
 						resources: [
-							"\(projectName)/SupportFiles/Resource/**"
+							"\(projectName)/SupportFiles/Resource/**",
+							"\(projectName)/SupportFiles/Lottie/**"
 						],
 						actions: targetAction,
 						dependencies: [

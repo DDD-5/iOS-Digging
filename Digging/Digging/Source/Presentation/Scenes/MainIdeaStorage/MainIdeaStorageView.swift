@@ -74,7 +74,7 @@ struct MainIdeaStorageView: View {
           spacing: 15,
           content: {
 						NavigationLink(
-							destination: DiggingTextDetailView(),
+							destination: DiggingTextDetailView(viewModel: DiggingTextDetailViewModel(postID: 2)),
 							label: {
 								DiggingGridCellView {
 									

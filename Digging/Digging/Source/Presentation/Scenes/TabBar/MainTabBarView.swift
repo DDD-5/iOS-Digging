@@ -18,28 +18,28 @@ struct MainTabBarView: View {
 				TabView(selection: $viewModel.itemSelected) {
 					MainIdeaStorageView()
 						.tabItem {
-							Image("tabbar_main_idea_storage")
+							Image(viewModel.itemSelected == 1 ? R.image.tabbar_main_idea_storage_select.name : R.image.tabbar_main_idea_storage_deselect.name)
 							Text("보관함")
 						}
 						.tag(1)
 					
 					MyDiggingView()
 						.tabItem {
-							Image("tabbar_create_digging")
+							Image(viewModel.itemSelected == 2 ? R.image.tabbar_create_digging_select.name : R.image.tabbar_create_digging_deselect.name)
 							Text("디깅")
 						}
 						.tag(2)
 					
 					SearchDiggingView()
 						.tabItem {
-							Image("tabbar_search_digging")
+							Image(viewModel.itemSelected == 3 ? R.image.tabbar_search_digging_select.name : R.image.tabbar_search_digging_deselect.name)
 							Text("검색")
 						}
 						.tag(3)
 					
 					MyDiggingInfoView()
 						.tabItem {
-							Image("tabbar_my_digging")
+							Image(viewModel.itemSelected == 4 ? R.image.tabbar_my_digging_select.name : R.image.tabbar_my_digging_deselect.name)
 							Text("마이 디깅")
 						}
 						.tag(4)

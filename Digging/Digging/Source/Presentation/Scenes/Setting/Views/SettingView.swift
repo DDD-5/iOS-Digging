@@ -40,6 +40,7 @@ struct SettingView: View {
 				.padding()
 
 		}
+		.navigationBarColor(backgroundColor: .white, tintColor: .darkGray)
 		.navigationBarBackButtonHidden(true)
 				.navigationBarTitle("설정", displayMode: .inline)
 				.navigationBarItems(leading:
@@ -94,4 +95,3 @@ struct SettingCategoryView_Previews: PreviewProvider {
 		SettingCategoryView(title: "text", image: R.image.right_calendar_arrow_img.name)
 	}
 }
-
