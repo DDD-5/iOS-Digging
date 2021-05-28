@@ -23,6 +23,8 @@ class CreateDiggingViewModel: ObservableObject {
   
   @Published var tagText: String = ""
   
+  @Published var linkText: String = ""
+  
   init(useCase: CreateDiggingUseCase) {
     self.useCase = useCase
   }
@@ -41,6 +43,25 @@ extension CreateDiggingViewModel {
     )
     
     useCase.createTextDigging(textDiggingInfo: info)
+      .sink { _ in
+        print("completed")
+      } receiveValue: { info in
+        print("Received : \(info)")
+      }
+      .store(in: &subscriptions)
+  }
+  
+  func createLinkDigging() {
+    
+    let info = CreateLinkDiggingInfo(
+      url: linkText,
+      tags: addedTagList,
+      title: title,
+      userName: "TestUser1",
+      userID: 13
+    )
+    
+    useCase.createLinkDigging(linkDiggingInfo: info)
       .sink { _ in
         print("completed")
       } receiveValue: { info in

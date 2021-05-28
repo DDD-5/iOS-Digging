@@ -13,9 +13,10 @@ struct GeneralDiggingInfo: Decodable {
   let url: String?
   let postID: Int
   let type: String?
+  let title: String?
   
   enum CodingKeys: String, CodingKey {
-    case content, url, type
+    case content, url, type, title
     case postID = "post_id"
   }
 }
