@@ -77,7 +77,7 @@ struct MainIdeaStorageView: View {
           content: {   
             ForEach(viewModel.recentDiggingList, id: \.postID) { diggingInfo in
               NavigationLink(
-                destination: DiggingTextDetailView(viewModel: DiggingTextDetailViewModel(postID: 2)),
+                destination: DiggingTextDetailView(viewModel: DiggingTextDetailViewModel(postID: 11)),
                 label: {
                   determineProperDiggingCellView(diggingInfo: diggingInfo)
                     .frame(height: 160)
