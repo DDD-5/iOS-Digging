@@ -74,16 +74,26 @@ struct MainIdeaStorageView: View {
           columns: gridLayout,
           alignment: .leading,
           spacing: 15,
-          content: {   
-            ForEach(viewModel.recentDiggingList, id: \.postID) { diggingInfo in
-              NavigationLink(
-                destination: DiggingTextDetailView(viewModel: DiggingTextDetailViewModel(postID: 11)),
-                label: {
-                  determineProperDiggingCellView(diggingInfo: diggingInfo)
-                    .frame(height: 160)
-                })
-            }
-        })
+					content: {
+						ForEach(viewModel.recentDiggingList, id: \.postID) { diggingInfo in
+							// TODO: 원시 데이터가 아닌, 별도의 구조체를 활용하여 변경예정
+							if let typeValue = diggingInfo.type,
+								 let diggingType = DiggingFolderType(rawValue: typeValue) {
+								if diggingType == .text {
+									NavigationLink(
+										destination: DiggingTextDetailView(viewModel: DiggingTextDetailViewModel(postID: diggingInfo.postID)),
+										label: {
+											determineProperDiggingCellView(diggingInfo: diggingInfo)
+												.frame(height: 160)
+										})
+								} else {
+									determineProperDiggingCellView(diggingInfo: diggingInfo)
+										.frame(height: 160)
+								}
+							}
+							
+						}
+					})
         .padding([.leading, .trailing], 20)
       }
       Spacer(minLength: 30)
