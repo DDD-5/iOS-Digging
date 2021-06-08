@@ -53,8 +53,10 @@ struct DiggingWidget: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-          CurrentDiggingWidgetCardView()
-//            DiggingWidgetEntryView(entry: entry)
+					// TODO: 해당 뷰 위젯 타겟으로 변경후 주석 졔거
+//          CurrentDiggingWidgetCardView()
+
+            DiggingWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
