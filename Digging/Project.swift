@@ -96,7 +96,8 @@ let project = Project(
              ]),
              sources: "DiggingWidget/**",
              dependencies: [
-                                  
+							.sdk(name: "SwiftUI.framework"),
+							.sdk(name: "WidgetKit.framework")
        ])
 		]
 
