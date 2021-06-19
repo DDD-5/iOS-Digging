@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 // TODO: Temp code for test
 extension String {
@@ -69,6 +70,10 @@ struct CreateDiggingView: View {
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   
   @ObservedObject var viewModel: CreateDiggingViewModel
+  
+  @State private var isPresented: Bool = false
+  
+  var configuration = PHPickerConfiguration()
   
   // TODO: temp code for test
   init(
@@ -153,7 +158,9 @@ struct CreateDiggingView: View {
               )
               .padding([.leading, .trailing], 20)
           case .image:
-            Text("")
+            AddPhotoButtonView(buttonAction: {
+              isPresented = true
+            })
           case .link:
             CustomTextField(placeholder: Text("복사한 링크를 붙여 넣거나, 직접 입력해주세요."), text: $viewModel.linkText)
               .frame(height: 44)
@@ -278,6 +285,14 @@ struct CreateDiggingView: View {
       Alert(title: Text("링크 Digging을 추가하였습니다"), message: nil, dismissButton: .default(Text("확인"), action: {
         self.presentationMode.wrappedValue.dismiss()
       }))
+    })
+    .sheet(
+      isPresented: $isPresented,
+      content: {
+        PHPhotoPickerView(
+          configuration: configuration,
+          isPresented: $isPresented
+        )
     })
   }
 }
