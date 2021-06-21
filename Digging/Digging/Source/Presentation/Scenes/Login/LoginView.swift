@@ -27,7 +27,7 @@ struct LoginView: View {
 					Spacer()
 				}
 
-				Image(R.image.digging_like_deselect.name)
+				Image(R.image.login_digging.name)
 					.resizable()
 					.frame(width: 197, height: 155, alignment: .center)
 					.padding([.top], 70)
