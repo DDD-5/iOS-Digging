@@ -26,6 +26,8 @@ struct LoginView: View {
 					})
 					Spacer()
 				}
+				
+				Spacer()
 
 				Image(R.image.login_digging.name)
 					.resizable()
@@ -33,7 +35,62 @@ struct LoginView: View {
 					.padding([.top], 70)
 				Spacer()
 
+				VStack {
+					Text("로그인 또는 회원가입")
+						.modifier(
+							DiggingFont(
+								type: .bold,
+								size: 24
+							)
+						)
+					Text("디깅에서 나만의 아이디어를 디깅하고 싶다면,\n지금 간단하게 시작해보세요!")
+						.modifier(
+							DiggingFont(
+								type: .regular,
+								size: 14
+							)
+						)
+						.multilineTextAlignment(.center)
+						.padding([.top], 20)
+				}
+				Button(action:{print("구글 로그인")}){
+					HStack(alignment: .center) {
+						Spacer()
+						Image(R.image.close.name)
+							.resizable()
+							.frame(width: 24, height: 24)
+						Text("구글 로그인")
+							.font(Font.custom("AppleSDGothicNeo-Bold", size: 16))
+							.foregroundColor(Color(red: 96 / 255, green: 96 / 255, blue: 96 / 255)
+							)
 
+						Spacer()
+					}
+					.padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
+				}
+				.background(RoundedRectangle(cornerRadius: 8).stroke(Color.black, lineWidth: /*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/))
+				.padding(EdgeInsets(top: 40, leading: 38, bottom: 0, trailing: 38))
+
+				Button(action:{print("애플 로그인")}){
+					HStack {
+						Spacer()
+
+						Image(R.image.close.name)
+							.resizable()
+							.frame(width: 24, height: 24)
+						Text("애플 로그인")
+							.font(Font.custom("AppleSDGothicNeo-Bold", size: 16))
+							.foregroundColor(Color.white)
+
+						Spacer()
+					}
+					.padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
+
+				}
+				.background(Color.black)
+				.cornerRadius(8)
+				.padding(EdgeInsets(top: 16, leading: 38, bottom: 0, trailing: 38))
+				Spacer()
 			}
 		}
 
