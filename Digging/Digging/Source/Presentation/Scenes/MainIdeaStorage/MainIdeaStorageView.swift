@@ -79,14 +79,23 @@ struct MainIdeaStorageView: View {
 							// TODO: 원시 데이터가 아닌, 별도의 구조체를 활용하여 변경예정
 							if let typeValue = diggingInfo.type,
 								 let diggingType = DiggingFolderType(rawValue: typeValue) {
-								if diggingType == .text {
+								
+								switch diggingType {
+								case .text:
 									NavigationLink(
 										destination: DiggingTextDetailView(viewModel: DiggingTextDetailViewModel(postID: diggingInfo.postID)),
 										label: {
 											determineProperDiggingCellView(diggingInfo: diggingInfo)
 												.frame(height: 160)
 										})
-								} else {
+								case .link:
+									NavigationLink(
+										destination: DiggingLinkDetailView(viewModel: DiggingLinkDetailViewModel(postID: diggingInfo.postID)),
+										label: {
+											determineProperDiggingCellView(diggingInfo: diggingInfo)
+												.frame(height: 160)
+										})
+								case .image:
 									determineProperDiggingCellView(diggingInfo: diggingInfo)
 										.frame(height: 160)
 								}

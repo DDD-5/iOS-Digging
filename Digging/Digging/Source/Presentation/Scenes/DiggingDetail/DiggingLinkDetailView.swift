@@ -10,22 +10,28 @@ import SwiftUI
 
 struct DiggingLinkDetailView: View {
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-	@State var recommendedTagList = ["일반 개발", "웹 개발", "Javascript", "React", "Vue.js", "Angular", "Node.js"]
+	@ObservedObject var viewModel: DiggingLinkDetailViewModel
+	
+	init(viewModel: DiggingLinkDetailViewModel) {
+		self.viewModel = viewModel
+	}
 	
 	var body: some View {
 		ScrollView {
 			VStack {
 				
-				DiggingDetailTitleView(title: "영감을 디깅하는 방법", date: "2021.04.21")
+				titleView()
 					.padding([.top], 20)
-				DiggingDetalLinkView(linkURL: "https://www.google.com")
+				
+				contentView()
+				
 				Divider()
 					.padding([.leading, .trailing], 20)
 				Spacer()
-				
+
 				FlowLayout(mode: .scrollable,
 									 binding: .constant(5),
-									 items: $recommendedTagList) {
+									 items: $viewModel.tags) {
 					Text($0)
 						.foregroundColor(.white)
 						.modifier(DiggingFont(type: .medium, size: 14))
@@ -78,6 +84,7 @@ struct DiggingLinkDetailView: View {
 						}
 						
 					})
+			.onAppear { self.viewModel.fetchDiggingLinkInfo()}
 			.navigationBarTitleDisplayMode(.inline)
 			.navigationBarColor(backgroundColor: .white, tintColor: .clear)
 			.navigationBarBackButtonHidden(true)
@@ -85,8 +92,20 @@ struct DiggingLinkDetailView: View {
 	}
 }
 
+extension DiggingLinkDetailView {
+	func titleView() -> some View {
+		return DiggingDetailTitleView(title: viewModel.linkDetailDTO.title, date: viewModel.linkDetailDTO.updateDate)
+	}
+	
+	func contentView() -> some View {
+		return
+			DiggingDetailLinkView(linkURL: viewModel.linkDetailDTO.url)
+	}
+}
+
+
 struct DiggingLinkDetailView_Previews: PreviewProvider {
 	static var previews: some View {
-		DiggingLinkDetailView()
+		DiggingLinkDetailView(viewModel: DiggingLinkDetailViewModel(postID: 1))
 	}
 }

@@ -109,4 +109,3 @@ struct DiggingTextDetailView_Previews: PreviewProvider {
 		DiggingTextDetailView(viewModel: DiggingTextDetailViewModel(postID: 0))
 	}
 }
-
