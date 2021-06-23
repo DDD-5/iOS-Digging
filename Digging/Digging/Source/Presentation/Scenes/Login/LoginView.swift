@@ -56,7 +56,7 @@ struct LoginView: View {
 				Button(action:{print("구글 로그인")}){
 					HStack(alignment: .center) {
 						Spacer()
-						Image(R.image.close.name)
+						Image(R.image.googleLogo.name)
 							.resizable()
 							.frame(width: 24, height: 24)
 						Text("구글 로그인")
@@ -68,14 +68,15 @@ struct LoginView: View {
 					}
 					.padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
 				}
-				.background(RoundedRectangle(cornerRadius: 8).stroke(Color.black, lineWidth: /*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/))
+				.background(Color.white)
+				.cornerRadius(8)
 				.padding(EdgeInsets(top: 40, leading: 38, bottom: 0, trailing: 38))
 
 				Button(action:{print("애플 로그인")}){
 					HStack {
 						Spacer()
 
-						Image(R.image.close.name)
+						Image(R.image.appleLogo.name)
 							.resizable()
 							.frame(width: 24, height: 24)
 						Text("애플 로그인")
