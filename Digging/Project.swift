@@ -80,7 +80,8 @@ let project = Project(
 						dependencies: [
               .package(product: "BottomSheet"),
               .package(product: "Lottie"),
-							.cocoapods(path: ".")
+							.cocoapods(path: "."),
+							.target(name: "DiggingWidget")
 						]
 					
 				),
@@ -88,15 +89,14 @@ let project = Project(
              platform: .iOS,
              product: .appExtension,
              bundleId: "com.oreo.ddd.Digging.DiggingWidget",
-             infoPlist: .extendingDefault(with: [
-                 "CFBundleDisplayName": "$(PRODUCT_NAME)",
-                 "NSExtension": [
-                         "NSExtensionPointIdentifier": "com.apple.widgetkit-extension"
-                     ]
-             ]),
-             sources: "DiggingWidget/**",
+						 infoPlist: .file(path: "DiggingWidget/SupportFiles/Info.plist"),
+             sources: "DiggingWidget/Source/**",
+						 resources: [
+							"DiggingWidget/SupportFiles/Resource/**"
+						 ],
              dependencies: [
-                                  
+							.sdk(name: "SwiftUI.framework"),
+							.sdk(name: "WidgetKit.framework")
        ])
 		]
 
