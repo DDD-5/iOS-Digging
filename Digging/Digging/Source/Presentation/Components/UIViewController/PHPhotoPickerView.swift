@@ -40,7 +40,7 @@ struct PHPhotoPickerView: UIViewControllerRepresentable {
       _ picker: PHPickerViewController,
       didFinishPicking results: [PHPickerResult]
     ) {
-      print(results)
+      print(results.first)
       parent.isPresented = false
     }
   }

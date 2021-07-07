@@ -39,6 +39,7 @@ struct AddPhotoButtonView: View {
 struct AddPhotoButtonView_Previews: PreviewProvider {
   static var previews: some View {
     AddPhotoButtonView(
-      buttonAction: { })
+      buttonAction: { }
+    )
   }
 }
