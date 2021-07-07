@@ -8,8 +8,14 @@
 
 import Foundation
 
-struct MyDiggingDateInfo {
-  let id: Int
-  let dataNumber: Int
-  let isStored: Bool
+struct MyDiggingDateInfo: Decodable {
+  let date: String?
+  let day: String?
+  let id: Int?
+  let isImage: Bool?
+  let isLink: Bool?
+  let isText: Bool?
+  let resultCode: String?
 }
+
+
