@@ -23,7 +23,7 @@ struct MainTabBarView: View {
 						}
 						.tag(1)
 					
-					MyDiggingView()
+					MyDiggingInfoView()
 						.tabItem {
 							Image(viewModel.itemSelected == 2 ? R.image.tabbar_create_digging_select.name : R.image.tabbar_create_digging_deselect.name)
 							Text("디깅")

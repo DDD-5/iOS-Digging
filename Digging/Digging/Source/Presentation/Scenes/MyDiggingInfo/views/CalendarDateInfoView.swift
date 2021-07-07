@@ -13,7 +13,7 @@ struct CalendarDateInfoView: View {
   
   var body: some View {
     VStack(spacing: 4) {
-      Text(dateInfo.dataNumber == 0 ? "" : "\(dateInfo.dataNumber)")
+      /*Text(dateInfo.dataNumber == 0 ? "" : "\(dateInfo.dataNumber)")
         .modifier(
           DiggingFont(
             type: .regular,
@@ -28,20 +28,20 @@ struct CalendarDateInfoView: View {
               width: 32,
               height: 32
             )
-        )
-      if dateInfo.isStored {
+        )*/
+      /*if dateInfo.isStored {
         HStack {
           CalendarStoredDisplayCircle().foregroundColor(.red)
           CalendarStoredDisplayCircle().foregroundColor(.blue)
           CalendarStoredDisplayCircle().foregroundColor(.yellow)
         }
-      }
+      }*/
     }
   }
 }
 
 struct CalendarDateInfoView_Previews: PreviewProvider {
   static var previews: some View {
-    CalendarDateInfoView(dateInfo: MyDiggingDateInfo(id: 0, dataNumber: 1, isStored: true))
+    CalendarDateInfoView(dateInfo: MyDiggingDateInfo(date: nil, day: nil, id: nil, isImage: nil, isLink: nil, isText: nil, resultCode: nil))
   }
 }
