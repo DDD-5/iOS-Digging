@@ -18,6 +18,9 @@ class MyDiggingInfoUseCase {
 
 extension MyDiggingInfoUseCase {
   func requestMonthlyMyDiggingInfo(userID: Int, dateString: String) -> AnyPublisher<[MyDiggingDateInfo], Error> {
-    return repository.requetMonthlyDiggingInfo(userID: userID, dateString: dateString)
+    return repository.requetMonthlyDiggingInfo(
+      userID: userID,
+      dateString: dateString
+    )
   }
 }

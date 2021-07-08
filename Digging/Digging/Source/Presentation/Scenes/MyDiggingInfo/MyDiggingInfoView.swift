@@ -101,6 +101,9 @@ struct MyDiggingInfoView: View {
         alignment: .topLeading
       )
     }
+    .onAppear {
+      viewModel.requestMonthlyMyDiggingInfo()
+    }
   }
 }
 

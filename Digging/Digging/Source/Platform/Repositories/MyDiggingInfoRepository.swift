@@ -20,7 +20,7 @@ class MyDiggingInfoRepositoryImpl: MyDiggingInfoRepository {
   
   func requetMonthlyDiggingInfo(userID: Int, dateString: String) -> AnyPublisher<[MyDiggingDateInfo], Error> {
     return provider
-      .requestPublisher(.fetchMyDiggingInfoByMonth(userID: 0, dateString: ""))
+      .requestPublisher(.fetchMyDiggingInfoByMonth(userID: userID, dateString: dateString))
       .handleEvents(receiveOutput: { response in
         print("response: \(response)")
       })

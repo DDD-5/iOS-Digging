@@ -29,9 +29,11 @@ extension MyDiggingInfoViewModel {
   }
   
   func requestMonthlyMyDiggingInfo() {
-    useCase.requestMonthlyMyDiggingInfo(userID: 1, dateString: "202106").sink { _ in
+    useCase.requestMonthlyMyDiggingInfo(userID: 1, dateString: "202106")
+    .sink { _ in
       print("completed")
     } receiveValue: { dateInfo in
+      self.dateInfoArray = dateInfo
       print("date info \(dateInfo)")
     }
     .store(in: &subscriptions)
