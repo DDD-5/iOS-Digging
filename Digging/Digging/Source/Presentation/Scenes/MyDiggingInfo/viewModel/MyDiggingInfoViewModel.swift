@@ -8,14 +8,16 @@
 
 import Foundation
 
-class MyDiggingInfoViewModel: ObservableObject {
+class MyDiggingInfoViewModel: BaseViewModel {
+  
+  let useCase: MyDiggingInfoUseCase
   
   let dayNameAlphabetArray = ["S", "M", "T", "W", "T", "F", "S"]
   
   var dateInfoArray: [MyDiggingDateInfo] = []
   
-  init() {
-    dateInfoArray = setupDateInfoArray()
+  init(useCase: MyDiggingInfoUseCase) {
+    self.useCase = useCase
   }
 }
 
@@ -24,5 +26,14 @@ extension MyDiggingInfoViewModel {
   func setupDateInfoArray() -> [MyDiggingDateInfo] {
     let dateInfoArray: [MyDiggingDateInfo] = []
     return dateInfoArray
+  }
+  
+  func requestMonthlyMyDiggingInfo() {
+    useCase.requestMonthlyMyDiggingInfo(userID: 1, dateString: "202106").sink { _ in
+      print("completed")
+    } receiveValue: { dateInfo in
+      print("date info \(dateInfo)")
+    }
+    .store(in: &subscriptions)
   }
 }

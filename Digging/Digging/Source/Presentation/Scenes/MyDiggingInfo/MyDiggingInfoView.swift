@@ -12,7 +12,7 @@ struct MyDiggingInfoView: View {
   
   // MARK: - Properties
   
-  @StateObject var viewModel: MyDiggingInfoViewModel = MyDiggingInfoViewModel()
+  @StateObject var viewModel: MyDiggingInfoViewModel = MyDiggingInfoViewModel(useCase: MyDiggingInfoUseCase(repository: MyDiggingInfoRepositoryImpl()))
   
   // MARK: - UI Components
   
