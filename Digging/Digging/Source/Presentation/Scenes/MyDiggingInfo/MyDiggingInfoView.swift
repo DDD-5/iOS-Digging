@@ -12,7 +12,7 @@ struct MyDiggingInfoView: View {
   
   // MARK: - Properties
   
-  @StateObject var viewModel: MyDiggingInfoViewModel = MyDiggingInfoViewModel(useCase: MyDiggingInfoUseCase(repository: MyDiggingInfoRepositoryImpl()))
+  @ObservedObject var viewModel: MyDiggingInfoViewModel = MyDiggingInfoViewModel(useCase: MyDiggingInfoUseCase(repository: MyDiggingInfoRepositoryImpl()))
   
   // MARK: - UI Components
   
@@ -45,7 +45,7 @@ struct MyDiggingInfoView: View {
         HStack {
           Image("left_calendar_arrow_img")
           Spacer()
-          Text("2021.03").modifier(
+          Text("2021.\(viewModel.dateInfoArray.first?.formattedDate?.day ?? 0)").modifier(
             DiggingFont(
               type: .medium,
               size: 18

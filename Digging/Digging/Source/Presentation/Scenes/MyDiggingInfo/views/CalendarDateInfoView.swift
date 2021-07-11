@@ -9,11 +9,12 @@
 import SwiftUI
 
 struct CalendarDateInfoView: View {
-  let dateInfo: MyDiggingDateInfo
+  var dateInfo: MyDiggingDateInfo
   
   var body: some View {
     VStack(spacing: 4) {
-      /*Text(dateInfo.dataNumber == 0 ? "" : "\(dateInfo.dataNumber)")
+      
+      Text("\(dateInfo.formattedDate?.day ?? 0)")
         .modifier(
           DiggingFont(
             type: .regular,
@@ -28,7 +29,7 @@ struct CalendarDateInfoView: View {
               width: 32,
               height: 32
             )
-        )*/
+        )
       /*if dateInfo.isStored {
         HStack {
           CalendarStoredDisplayCircle().foregroundColor(.red)
@@ -42,6 +43,6 @@ struct CalendarDateInfoView: View {
 
 struct CalendarDateInfoView_Previews: PreviewProvider {
   static var previews: some View {
-    CalendarDateInfoView(dateInfo: MyDiggingDateInfo(date: nil, day: nil, id: nil, isImage: nil, isLink: nil, isText: nil, resultCode: nil))
+    CalendarDateInfoView(dateInfo: MyDiggingDateInfo(date: nil, day: nil, id: 0, isImage: nil, isLink: nil, isText: nil, resultCode: nil))
   }
 }

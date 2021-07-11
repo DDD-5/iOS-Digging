@@ -14,7 +14,7 @@ class MyDiggingInfoViewModel: BaseViewModel {
   
   let dayNameAlphabetArray = ["S", "M", "T", "W", "T", "F", "S"]
   
-  var dateInfoArray: [MyDiggingDateInfo] = []
+  @Published var dateInfoArray: [MyDiggingDateInfo] = [MyDiggingDateInfo(date: "2021-06-21", day: "1", id: 1, isImage: nil, isLink: nil, isText: nil, resultCode: nil)]
   
   init(useCase: MyDiggingInfoUseCase) {
     self.useCase = useCase
@@ -23,17 +23,14 @@ class MyDiggingInfoViewModel: BaseViewModel {
 
 extension MyDiggingInfoViewModel {
   
-  func setupDateInfoArray() -> [MyDiggingDateInfo] {
-    let dateInfoArray: [MyDiggingDateInfo] = []
-    return dateInfoArray
-  }
-  
   func requestMonthlyMyDiggingInfo() {
     useCase.requestMonthlyMyDiggingInfo(userID: 1, dateString: "202106")
     .sink { _ in
       print("completed")
     } receiveValue: { dateInfo in
-      self.dateInfoArray = dateInfo
+      DispatchQueue.main.async {
+        self.dateInfoArray.append(contentsOf: dateInfo)
+      }
       print("date info \(dateInfo)")
     }
     .store(in: &subscriptions)
