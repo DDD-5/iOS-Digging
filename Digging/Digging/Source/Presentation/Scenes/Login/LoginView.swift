@@ -11,11 +11,11 @@ import SwiftUI
 
 struct LoginView: View {
 	var body: some View {
-
+		
 		ZStack {
 			Color.diggingYellow.edgesIgnoringSafeArea(.all)
 			VStack {
-
+				
 				HStack {
 					Button(action: {}, label: {
 						Image("close_icon_img")
@@ -28,13 +28,13 @@ struct LoginView: View {
 				}
 				
 				Spacer()
-
+				
 				Image(R.image.login_digging.name)
 					.resizable()
 					.frame(width: 197, height: 155, alignment: .center)
 					.padding([.top], 70)
 				Spacer()
-
+				
 				VStack {
 					Text("로그인 또는 회원가입")
 						.modifier(
@@ -63,7 +63,7 @@ struct LoginView: View {
 							.font(Font.custom("AppleSDGothicNeo-Bold", size: 16))
 							.foregroundColor(Color(red: 96 / 255, green: 96 / 255, blue: 96 / 255)
 							)
-
+						
 						Spacer()
 					}
 					.padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
@@ -71,22 +71,21 @@ struct LoginView: View {
 				.background(Color.white)
 				.cornerRadius(8)
 				.padding(EdgeInsets(top: 40, leading: 38, bottom: 0, trailing: 38))
-
+				
 				Button(action:{print("애플 로그인")}){
 					HStack {
 						Spacer()
-
+						
 						Image(R.image.appleLogo.name)
 							.resizable()
 							.frame(width: 24, height: 24)
 						Text("애플 로그인")
 							.font(Font.custom("AppleSDGothicNeo-Bold", size: 16))
 							.foregroundColor(Color.white)
-
 						Spacer()
 					}
 					.padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
-
+					
 				}
 				.background(Color.black)
 				.cornerRadius(8)
@@ -94,10 +93,7 @@ struct LoginView: View {
 				Spacer()
 			}
 		}
-
-
-		
-		}
+	}
 }
 
 struct LoginView_Previews: PreviewProvider {
