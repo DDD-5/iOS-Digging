@@ -17,6 +17,7 @@ struct DiggingLinkDetailDTO {
 	let isLike: Bool
 	let tags: [String]
 }
+
 extension DiggingLinkDetailDTO {
 	init() {
 		postID = 0
@@ -29,7 +30,6 @@ extension DiggingLinkDetailDTO {
 	}
 
 	var updateDate: String {
-
 		return dateToString(updatedAt, dateFormat: "yyyy.MM.dd")
 	}
 }

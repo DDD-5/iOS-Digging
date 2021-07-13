@@ -27,4 +27,3 @@ struct DiggingLinkInfo: Codable {
 		case tags = "tags"
 	}
 }
-

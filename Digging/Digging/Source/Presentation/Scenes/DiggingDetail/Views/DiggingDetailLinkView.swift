@@ -12,6 +12,7 @@ struct DiggingDetailLinkView: View {
 	var linkURL: String
 	
 	var body: some View {
+		// TODO: 기본값 google 제거 예정
 		Link(destination: URL(string: linkURL) ?? URL(string: "https://www.google.com")!, label: {
 			Text(linkURL)
 				.underline()

@@ -37,21 +37,14 @@ extension DiggingLinkDetailViewModel {
 									 print(error)
 					},
 					receiveValue: { [weak self] in
-						self?.generateLinkDetailDTO($0)
+						self?.setUpLinkDetailDTO($0)
 					}
 			)
 			.store(in: &cancellables)
 	}
 	
-	private func generateLinkDetailDTO(_ info: DiggingLinkInfo) {
-		self.linkDetailDTO = DiggingLinkDetailDTO(postID: info.postID,
-																							linkID:info.linkID,
-																							title: info.titile,
-																							url: info.url,
-																							updatedAt: info.updatedAt,
-																							isLike: info.isLike,
-																							tags: info.tags)
+	private func setUpLinkDetailDTO(_ info: DiggingLinkInfo) {
+		self.linkDetailDTO = DiggingLinkDetailDTO(postID: info.postID, linkID:info.linkID, title: info.titile, url: info.url, updatedAt: info.updatedAt, isLike: info.isLike, tags: info.tags)
 		self.tags = info.tags
-		
 	}
 }
