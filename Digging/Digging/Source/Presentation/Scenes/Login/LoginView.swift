@@ -7,9 +7,10 @@
 //
 
 import SwiftUI
-
+import AuthenticationServices
 
 struct LoginView: View {
+	@State var appleSignInDelegate: SignInWithAppleDelegate? = nil
 	var body: some View {
 		
 		ZStack {
@@ -72,7 +73,9 @@ struct LoginView: View {
 				.cornerRadius(8)
 				.padding(EdgeInsets(top: 40, leading: 38, bottom: 0, trailing: 38))
 				
-				Button(action:{print("애플 로그인")}){
+				Button(action:{
+					showAppleLogin()
+				}){
 					HStack {
 						Spacer()
 						
@@ -102,3 +105,17 @@ struct LoginView_Previews: PreviewProvider {
 	}
 }
 
+extension LoginView {
+	private func showAppleLogin() {
+		appleSignInDelegate = SignInWithAppleDelegate {
+			print("로그인 성공?: \($0)")
+		}
+		let request = ASAuthorizationAppleIDProvider().createRequest()
+		request.requestedScopes = [.fullName, .email]
+
+		let controller = ASAuthorizationController(authorizationRequests: [request])
+		controller.delegate = appleSignInDelegate
+		controller.presentationContextProvider = appleSignInDelegate
+		controller.performRequests()
+	}
+}
