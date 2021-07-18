@@ -10,6 +10,7 @@ import Moya
 
 enum MyDiggingInfoService {
   case fetchMyDiggingInfoByMonth(userID: Int, dateString: String)
+  case fetchMyDiggingInfoByDay(userID: Int, dateString: String)
 }
 
 extension MyDiggingInfoService: BaseService {
@@ -18,12 +19,16 @@ extension MyDiggingInfoService: BaseService {
     switch self {
     case .fetchMyDiggingInfoByMonth:
       return "calendar/allcheck"
+    case .fetchMyDiggingInfoByDay:
+      return "calendar/readdaypost"
     }
   }
   
   var method: Moya.Method {
     switch self {
     case .fetchMyDiggingInfoByMonth:
+      return .get
+    case .fetchMyDiggingInfoByDay:
       return .get
     }
   }
@@ -35,6 +40,15 @@ extension MyDiggingInfoService: BaseService {
   var task: Task {
     switch self {
     case let .fetchMyDiggingInfoByMonth(userID, date):
+      let parameters: [String: Any] = [
+        "userid" : userID,
+        "yyyyMM": date
+      ]
+      return .requestParameters(
+        parameters: parameters,
+        encoding: URLEncoding.queryString
+      )
+    case let .fetchMyDiggingInfoByDay(userID, date):
       let parameters: [String: Any] = [
         "userid" : userID,
         "yyyyMM": date

@@ -23,4 +23,11 @@ extension MyDiggingInfoUseCase {
       dateString: dateString
     )
   }
+  
+  func requestDailyMyDiggingInfo(userID: Int, dateString: String) -> AnyPublisher<[GeneralDiggingInfo], Error> {
+    return repository.requetDailyDiggingInfo(
+      userID: userID,
+      dateString: dateString
+    )
+  }
 }
