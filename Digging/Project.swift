@@ -76,6 +76,7 @@ let project = Project(
 							"\(projectName)/SupportFiles/Resource/**",
 							"\(projectName)/SupportFiles/Lottie/**"
 						],
+						entitlements: .relativeToManifest("\(projectName)/Digging.entitlements"),
 						actions: targetAction,
 						dependencies: [
               .package(product: "BottomSheet"),
@@ -83,7 +84,6 @@ let project = Project(
 							.cocoapods(path: "."),
 							.target(name: "DiggingWidget")
 						]
-					
 				),
       Target(name: "DiggingWidget",
              platform: .iOS,
