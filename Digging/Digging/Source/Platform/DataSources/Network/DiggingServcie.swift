@@ -14,7 +14,7 @@ enum DiggingServcie {
 	case diggingList(userID: String)
 	case diggingDetail(diggingID: String)
 	case totalTags(userID: String)
-	case test
+	case appleLogin(token: String, userEmail: String)
 	case diggingDetailText(postID: Int)
 	case diggingDetailLink(postID: Int)
 }
@@ -30,8 +30,8 @@ extension DiggingServcie: BaseService {
 				return ""
 			case .totalTags(let userID):
 				return "/api/user/get_total_tags"
-			case .test:
-				return"/posts"
+			case .appleLogin:
+				return"/appleLogin"
 		case .diggingDetailText:
 			return "/posttext"
 		case .diggingDetailLink:
@@ -49,8 +49,8 @@ extension DiggingServcie: BaseService {
 				return .get
 			case .totalTags:
 				return .get
-			case.test:
-				return .get
+			case.appleLogin:
+				return .post
 		case .diggingDetailText, .diggingDetailLink:
 			return .get
 		}
@@ -65,8 +65,11 @@ extension DiggingServcie: BaseService {
 				return .requestCompositeParameters(bodyParameters: body, bodyEncoding: parameterEncoding, urlParameters: parameters)
 		case .diggingList, .diggingDetail, .totalTags, .diggingDetailText, .diggingDetailLink:
 				return .requestParameters(parameters: parameters, encoding: parameterEncoding)
-			case .test:
-				return .requestParameters(parameters: parameters, encoding: parameterEncoding)
+			case let .appleLogin(token, email):
+				// TODO: 서버 요청에 따라 변경 예정 임시 바디형태처리
+				body["token"] = token
+				body["email"] = email
+				return .requestCompositeParameters(bodyParameters: body, bodyEncoding: parameterEncoding, urlParameters: parameters)
 		}
 	}
 	
@@ -87,7 +90,7 @@ extension DiggingServcie: BaseService {
 				return parameters
 			case .totalTags(let userID):
 				return parameters
-			case .test:
+			case .appleLogin:
 				return parameters
 		case .diggingDetailText(let postID):
 			// TODO: Userdefault 활용 예정, 의견 필요 하며, 추후 헤더에 토큰 주입시 불필요하여, 고정 값 처리
@@ -104,11 +107,9 @@ extension DiggingServcie: BaseService {
 	
 	var parameterEncoding: ParameterEncoding {
 		switch self {
-			case .createDigging:
+			case .createDigging, .appleLogin:
 				return JSONEncoding.default
 		case .diggingList, .diggingDetail, .totalTags, .diggingDetailText, .diggingDetailLink:
-				return URLEncoding.queryString
-			case .test:
 				return URLEncoding.queryString
 		}
 	}

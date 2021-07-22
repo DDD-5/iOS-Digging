@@ -11,6 +11,13 @@ import AuthenticationServices
 
 struct LoginView: View {
 	@State var appleSignInDelegate: SignInWithAppleDelegate? = nil
+
+	@ObservedObject var viewModel: LoginViewModel
+
+	init(viewModel: LoginViewModel) {
+		self.viewModel = viewModel
+	}
+
 	var body: some View {
 		
 		ZStack {
@@ -101,7 +108,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
 	static var previews: some View {
-		LoginView()
+		LoginView(viewModel: LoginViewModel())
 	}
 }
 

@@ -16,7 +16,7 @@ protocol DiggingRepository: AnyObject {
 //	func diggingList<D>(type: D.Type, userID: String) -> AnyPublisher<D, MoyaError>  where D : Decodable
 //	func diggingDetail<D>(type: D.Type, diggingID: String) -> AnyPublisher<D, MoyaError>  where D : Decodable
 //	func totalTags<D>(type: D.Type, userID: String) -> AnyPublisher<D, MoyaError>  where D : Decodable
-	func totlaTags(userID: String) -> AnyPublisher<Data, DiggingNetworkError>
+	func appleLogin(token: String, userEmail: String) -> AnyPublisher<Data, DiggingNetworkError>
 }
 
 class DefaultDiggingRepository: DiggingRepository {
@@ -45,8 +45,8 @@ class DefaultDiggingRepository: DiggingRepository {
 //			.map(D.self)
 //	}
 
-	func totlaTags(userID: String) -> AnyPublisher<Data, DiggingNetworkError> {
-		return self.networking.request(DiggingServcie.test)
+	func appleLogin(token: String, userEmail: String) -> AnyPublisher<Data, DiggingNetworkError> {
+		return self.networking.request(DiggingServcie.appleLogin(token: token, userEmail: userEmail))
 			.map(\.data)
 			.eraseToAnyPublisher()
 

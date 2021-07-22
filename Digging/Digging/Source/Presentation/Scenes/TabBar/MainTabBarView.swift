@@ -46,7 +46,7 @@ struct MainTabBarView: View {
 				}
 				.accentColor(.black)
 				.sheet(isPresented: $viewModel.isCustomItemSelected) {
-					LoginView()
+					LoginView(viewModel: LoginViewModel())
 				}
 			}
 		}
