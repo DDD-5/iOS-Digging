@@ -16,7 +16,11 @@ struct MainTabBarView: View {
 		NavigationView {
 			ZStack {
 				TabView(selection: $viewModel.itemSelected) {
-					MainIdeaStorageView()
+					// TODO: 네비게이터, 코디네이터 적용시 해당 뷰모델 주입예정
+					let storageViewModel = MainIdeaStorageViewModel(
+						useCase: MainIdeaStorageUseCase(repository: MainIdeaStorageRepositoryImpl()), isTapMainIdeaStorage: $viewModel.isTapMainIdeaStorage)
+
+					MainIdeaStorageView(viewModel: storageViewModel)
 						.tabItem {
 							Image(viewModel.itemSelected == 1 ? R.image.tabbar_main_idea_storage_select.name : R.image.tabbar_main_idea_storage_deselect.name)
 							Text("보관함")

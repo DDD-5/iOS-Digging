@@ -15,13 +15,21 @@ class MainTabBarViewModel: ObservableObject {
 
 	let objectWillChange = PassthroughSubject<MainTabBarViewModel, Never>()
 
+	@Published var isTapMainIdeaStorage: Bool = false
+
+
 	var itemSelected: Int {
 		didSet {
 			if itemSelected == customActionteminidex {
 				itemSelected = oldValue
 				isCustomItemSelected = true
 			}
+
 			objectWillChange.send(self)
+		}
+		willSet {
+
+			isTapMainIdeaStorage = newValue == 1
 		}
 	}
 

@@ -79,13 +79,28 @@ class MainIdeaStorageViewModel: ObservableObject {
   @Published var folderInfoArray: [DiggingFolderInfo] = []
   
   @Published var recentDiggingList: [GeneralDiggingInfo] = []
-  
-  init(useCase: MainIdeaStorageUseCase) {
+
+	@State private var isTapMainIdeaStorageState: Bool = false {
+		didSet {
+			isTapMainIdeaStorageState = isTapMainIdeaStorage
+		}
+	}
+	@Binding var isTapMainIdeaStorage: Bool
+
+	init(useCase: MainIdeaStorageUseCase, isTapMainIdeaStorage: Binding<Bool>) {
     self.useCase = useCase
+		self._isTapMainIdeaStorage = isTapMainIdeaStorage
     self.folderInfoArray = baseFolderInformations()
-    //requestRecentDiggings(userID: 1)
+
+
+		self.subscribeTapMainIdeaStorage()
   }
-  
+	
+	private func subscribeTapMainIdeaStorage() {
+		guard isTapMainIdeaStorage else { return }
+		requestRecentDiggings(userID: 1)
+	}
+
   private func baseFolderInformations() -> [DiggingFolderInfo] {
     var folderInfoArray: [DiggingFolderInfo] = []
     

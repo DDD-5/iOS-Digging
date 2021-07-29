@@ -12,14 +12,15 @@ struct MainIdeaStorageView: View {
   // MARK: - Properties
   
   @ObservedObject
-  var viewModel = MainIdeaStorageViewModel(
-    useCase: MainIdeaStorageUseCase(repository: MainIdeaStorageRepositoryImpl())
-  )
-  
+	var viewModel: MainIdeaStorageViewModel
+
   var gridLayout = [
     GridItem(.adaptive(minimum: 160, maximum: 160), spacing: 15)
   ]
-  
+
+	init(viewModel: MainIdeaStorageViewModel) {
+		self.viewModel = viewModel
+	}
   // MARK: - Layout
   
   var body: some View {
@@ -130,8 +131,8 @@ struct MainIdeaStorageView: View {
   }
 }
 
-struct MainIdeaStorageView_Previews: PreviewProvider {
-  static var previews: some View {
-    MainIdeaStorageView()
-  }
-}
+//struct MainIdeaStorageView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    MainIdeaStorageView()
+//  }
+//}
